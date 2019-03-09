@@ -6,11 +6,13 @@ from django.utils import timezone
 
 # Create your views here.
 
-# Api data
-def get_api_data(request):
-
+# Function to get and process request and response
+def get_match_data(request):
+    # Your API_KEY
     api_key = "679b57ce04028d0c3b6d5b1263c48e545ee123234cd101a97397c72ec88daa1b"
 
+    # Querystring data recheived via a form in match.html
+    # league_id,from_date and to_date
     if request.method == "POST":
         league_id = request.POST.get('league_id')
     else :
@@ -29,6 +31,7 @@ def get_api_data(request):
         to_date = datetime.datetime.now().date()
 
 
+    # Requel URl, Querystring, Request headers
     url = "https://apifootball.com/api/"
 
     querystring = {"action":"get_events",'league_id':league_id,"from":from_date,"to":to_date,"APIkey":api_key}
@@ -39,6 +42,8 @@ def get_api_data(request):
         'cache-control': "no-cache",
         'Postman-Token': "7e0a735b-3622-4bc7-a4dd-a66f97a2392d"
         }
+
+    # Response data and it's formating into json
 
     response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
     response = response.json()
@@ -60,7 +65,7 @@ def get_api_data(request):
          }
          match_data.append(match)
 
-    return render(request, 'api.html', context={'match_data':match_data})
+    return render(request, 'match.html', context={'match_data':match_data})
 
 
 # Converting json date string to custom date format
@@ -123,8 +128,12 @@ def is_next_day(day):
     elif day == today + 1:
         return True
 
+# check wheare the given year is leap year or not
 def is_leap_year(year):
-    if year % 4 == 0 : 
-        return True;
+    if year % 100 == 0 :
+        if year % 400 == 0:
+            return True
+    elif year % 4 == 0:
+                return True;
     else:
         return False

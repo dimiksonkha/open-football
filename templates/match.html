@@ -7,7 +7,7 @@
 	<body>
 		<div class="col-md-7">
 
-			<form class="" action="{% url 'football:api' %}" method="POST">
+			<form class="" action="{% url 'football:match_data' %}" method="POST">
 					{% csrf_token %}
 				<select name="league_id">
 					<option value="62" selected> English Permier League </option>
