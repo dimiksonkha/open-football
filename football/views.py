@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import requests
 import datetime
+from django.utils import timezone
+
 
 # Create your views here.
 
@@ -70,24 +72,59 @@ def date_format(date):
 
     if day == datetime.datetime.now().date().day :
         return "Today"
-    # elif day > datetime.datetime.now().date().day :
-    #     return "Tommorow"
-
+    elif is_next_day(day):
+         return "Tommorow"
     else:
-        print(day)
-        return temp_date
+        return temp_date # have to work here
 
 # Converting json time string to custom time format
 def time_format(time):
-    temp_time = time.split(':')
-    hour = int(temp_time [0]) + 6
-    minutes = int(temp_time[1])
-    ap = "AM"
+    if time == 'Postp.':
+        return "Time TBD"
+    else:
+        temp_time = time.split(':')
+        hour = int(temp_time [0]) + 6 # have to work here. time should be in current timezone
+        minutes = int(temp_time[1])
+        if minutes < 10:
+            minutes = str(minutes)
+            minutes = "0" + minutes
+        else:
+            minutes = str(minutes)
+        ap = "AM"
 
-    if hour >= 12 and hour <= 23:
-        ap = "PM"
+        if hour >= 12 and hour <= 23:
+            ap = "PM"
 
-    if hour > 12:
-        hour = hour%12
+        if hour > 12:
+            hour = hour%12
 
-    return str(hour) + ":" + str(minutes) + " " + ap
+        return str(hour) + ":" + minutes + " " + ap
+
+# Tell if a given day is next_day of today
+def is_next_day(day):
+
+    today = int(datetime.datetime.now().date().day)
+    month = int(datetime.datetime.now().date().month)
+    year = int(datetime.datetime.now().date().year)
+
+
+    days_31 = [1,3,5,7,8,10,12]
+    days_30 = [4,6,9,11]
+
+    if day == 1 :
+        if (month in days_30 and today == 30) or (month in days_31 and today ==31):
+            return True
+        elif month == 2:
+            if is_leap_year(year) and today == 29:
+                return True
+            elif today == 28:
+                return True
+
+    elif day == today + 1:
+        return True
+
+def is_leap_year(year):
+    if year % 4 == 0 : 
+        return True;
+    else:
+        return False
