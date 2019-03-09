@@ -10,8 +10,8 @@
 			<form class="" action="{% url 'football:api' %}" method="POST">
 					{% csrf_token %}
 				<select name="league_id">
+					<option value="62" selected> English Permier League </option>
 					<option value="109" > Spanish La Liga </option>
-					<option value="62"> English Permier League </option>
 				</select>
 
 				<input type="date" name="from_date" value="">
@@ -26,6 +26,14 @@
 		   		<td>{{match.home_team | safe }}</td>
 					<td>{{match.home_team_score}}:{{match.away_team_score}}</td>
 					<td>{{match.away_team | safe }}</td>
+					{% if match.match_status %}
+					<td>{{match.match_status}}</td>
+					{% else %}
+					<td>
+						{{match.match_date}} <br>
+						{{match.match_time}}
+					</td>
+					{% endif %}
 
 		   	</tr>
 				{% endfor %}

@@ -16,6 +16,7 @@ def get_api_data(request):
 
     if request.method == "POST":
         from_date = request.POST.get('from_date')
+
     else:
         from_date = datetime.datetime.now().date()
 
@@ -45,11 +46,48 @@ def get_api_data(request):
 
     for i in range(length):
          match = {
-             'home_team' : response[i]['match_hometeam_name'],
-             'home_team_score' : response[i]['match_hometeam_score'],
-             'away_team' : response[i]['match_awayteam_name'],
-             'away_team_score' : response[i]['match_awayteam_score']
+            'match_id' : response[i]['match_id'],
+            'match_status' : response[i]['match_status'],
+            'match_date' : date_format(response[i]['match_date']),
+            'match_time' : time_format(response[i]['match_time']),
+            'home_team' : response[i]['match_hometeam_name'],
+            'home_team_score' : response[i]['match_hometeam_score'],
+            'away_team' : response[i]['match_awayteam_name'],
+            'away_team_score' : response[i]['match_awayteam_score']
+
          }
          match_data.append(match)
 
     return render(request, 'api.html', context={'match_data':match_data})
+
+
+# Converting json date string to custom date format
+def date_format(date):
+
+    temp_date = date.split('-')
+    day = int(temp_date [2])
+    month = int(temp_date [1])
+
+    if day == datetime.datetime.now().date().day :
+        return "Today"
+    # elif day > datetime.datetime.now().date().day :
+    #     return "Tommorow"
+
+    else:
+        print(day)
+        return temp_date
+
+# Converting json time string to custom time format
+def time_format(time):
+    temp_time = time.split(':')
+    hour = int(temp_time [0]) + 6
+    minutes = int(temp_time[1])
+    ap = "AM"
+
+    if hour >= 12 and hour <= 23:
+        ap = "PM"
+
+    if hour > 12:
+        hour = hour%12
+
+    return str(hour) + ":" + str(minutes) + " " + ap
