@@ -5,5 +5,5 @@ from football import views
 app_name = 'football'
 
 urlpatterns = [
-    path('api/', views.get_match_data, name='match_data'),  
+    path('matches/', views.get_match_data, name='match_data'),  
 ]

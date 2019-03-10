@@ -1,7 +1,8 @@
 from django.shortcuts import render
 import requests
 import datetime
-from django.utils import timezone
+import pytz
+from tzlocal import get_localzone
 
 
 # Create your views here.
@@ -56,13 +57,14 @@ def get_match_data(request):
             'match_id' : response[i]['match_id'],
             'match_status' : response[i]['match_status'],
             'match_date' : date_format(response[i]['match_date']),
-            'match_time' : time_format(response[i]['match_time']),
+            'match_time' : time_format(response[i]['match_date'],response[i]['match_time']),
             'home_team' : response[i]['match_hometeam_name'],
             'home_team_score' : response[i]['match_hometeam_score'],
             'away_team' : response[i]['match_awayteam_name'],
             'away_team_score' : response[i]['match_awayteam_score']
 
          }
+
          match_data.append(match)
 
     return render(request, 'match.html', context={'match_data':match_data})
@@ -85,13 +87,29 @@ def date_format(date):
         return weekDay(year,month,day) + "," +str(month) +"/"+ str(day) # have to work here
 
 # Converting json time string to custom time format
-def time_format(time):
+def time_format(date, time):
     if time == 'Postp.':
         return "Time TBD"
     else:
+        temp_date = date.split('-')
+        year = int(temp_date[0])
+        month = int(temp_date [1])
+        day = int(temp_date [2])
+
         temp_time = time.split(':')
-        hour = int(temp_time [0]) + 6 # have to work here. time should be in current timezone
+        hour = int(temp_time [0])
         minutes = int(temp_time[1])
+
+        temp_dt = datetime.datetime(year,month,day,hour,minutes,10)
+        temp_dt_utc = temp_dt.replace(tzinfo=pytz.UTC)
+        tz_local = get_localzone()
+        local_dt = temp_dt_utc.astimezone(tz_local)
+
+        hour = local_dt.hour
+        minutes = local_dt.minute
+        print(temp_dt_utc)
+        print(local_dt)
+
         if minutes < 10:
             minutes = str(minutes)
             minutes = "0" + minutes
@@ -106,6 +124,8 @@ def time_format(time):
             hour = hour%12
 
         return str(hour) + ":" + minutes + " " + ap
+
+
 
 # Tell if a given day is next_day of today
 def is_next_day(day):
