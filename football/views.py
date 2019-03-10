@@ -112,7 +112,7 @@ def match_details(request, match_id):
     length = len(response)
 
 
-
+    # Populating Match Overview Information
     match_info = {
         "match_id": response [0]['match_id'],
         "country_id": response [0]['country_id'],
@@ -138,8 +138,129 @@ def match_details(request, match_id):
 
     }
 
+    # Populating Goalscorer Information
+    length = len(response[0]['goalscorer'])
+    goalscorer = []
 
-    return render(request, 'match-details.html', context={'match_info':match_info})
+    for i in range(length):
+        scorer = {
+         "time": response[0]['goalscorer'][i]['time'],
+         "home_scorer":response[0]['goalscorer'][i]['home_scorer'],
+         "score": response[0]['goalscorer'][i]['score'],
+         "away_scorer": response[0]['goalscorer'][i]['away_scorer']
+
+        }
+        goalscorer.append(scorer)
+
+    # Populating Match faul card Information
+    length = len(response[0]['cards'])
+    cards = []
+
+    for i in range(length):
+        card = {
+        "time": response[0]['cards'][i]['time'],
+        "home_fault":response[0]['cards'][i]['home_fault'],
+        "card": response[0]['cards'][i]['card'],
+        "away_fault":response[0]['cards'][i]['away_fault']
+
+        }
+        cards.append(card)
+
+    # Populating Starting Lineup for home team
+    length = len(response[0]['lineup']['home']['starting_lineups'])
+    lineup_home_starting = []
+
+    for i in range(length):
+        lineup_home_start = {
+         "lineup_player": response[0]['lineup']['home']['starting_lineups'][i]['lineup_player'],
+         "lineup_number": response[0]['lineup']['home']['starting_lineups'][i]['lineup_number'],
+         "lineup_position": response[0]['lineup']['home']['starting_lineups'][i]['lineup_position']
+        }
+        lineup_home_starting.append(lineup_home_start)
+
+
+    # Populating Substitutes Lineup for home team
+    length = len(response[0]['lineup']['home']['substitutes'])
+    lineup_home_substitutes = []
+
+    for i in range(length):
+        lineup_home_subs = {
+         "lineup_player": response[0]['lineup']['home']['substitutes'][i]['lineup_player'],
+         "lineup_number": response[0]['lineup']['home']['substitutes'][i]['lineup_number'],
+         "lineup_position": response[0]['lineup']['home']['substitutes'][i]['lineup_position']
+        }
+        lineup_home_substitutes.append(lineup_home_subs)
+
+    # Populating Coach/Manager Lineup for home team
+    home_manager = response[0]['lineup']['home']['coach'][0]
+
+    # Populating Substitutions Lineup for home team
+    length = len(response[0]['lineup']['home']['substitutions'])
+    lineup_home_substitutions = []
+
+    for i in range(length):
+        lineup_home_subs = {
+         "lineup_player": response[0]['lineup']['home']['substitutions'][i]['lineup_player'],
+         "lineup_number": response[0]['lineup']['home']['substitutions'][i]['lineup_number'],
+         "lineup_position":response[0]['lineup']['home']['substitutions'][i]['lineup_position'],
+         "lineup_time":response[0]['lineup']['home']['substitutions'][i]['lineup_time']
+        }
+        lineup_home_substitutions.append(lineup_home_subs)
+
+    # Populating Starting Lineup for away team
+    length = len(response[0]['lineup']['away']['starting_lineups'])
+    lineup_away_starting = []
+
+    for i in range(length):
+        lineup_away_start = {
+         "lineup_player": response[0]['lineup']['away']['starting_lineups'][i]['lineup_player'],
+         "lineup_number": response[0]['lineup']['away']['starting_lineups'][i]['lineup_number'],
+         "lineup_position": response[0]['lineup']['away']['starting_lineups'][i]['lineup_position']
+        }
+        lineup_away_starting.append(lineup_away_start)
+
+
+    # Populating Substitutes Lineup for away team
+    length = len(response[0]['lineup']['away']['substitutes'])
+    lineup_away_substitutes = []
+
+    for i in range(length):
+        lineup_away_subs = {
+         "lineup_player": response[0]['lineup']['away']['substitutes'][i]['lineup_player'],
+         "lineup_number": response[0]['lineup']['away']['substitutes'][i]['lineup_number'],
+         "lineup_position": response[0]['lineup']['away']['substitutes'][i]['lineup_position']
+        }
+        lineup_away_substitutes.append(lineup_away_subs)
+
+    # Populating Coach/Manager Lineup for away team
+    away_manager = response[0]['lineup']['away']['coach'][0]
+
+    # Populating Substitutions Lineup for away team
+    length = len(response[0]['lineup']['away']['substitutions'])
+    lineup_away_substitutions = []
+
+    for i in range(length):
+        lineup_away_subs = {
+         "lineup_player": response[0]['lineup']['away']['substitutions'][i]['lineup_player'],
+         "lineup_number": response[0]['lineup']['away']['substitutions'][i]['lineup_number'],
+         "lineup_position":response[0]['lineup']['away']['substitutions'][i]['lineup_position'],
+         "lineup_time":response[0]['lineup']['away']['substitutions'][i]['lineup_time']
+        }
+        lineup_away_substitutions.append(lineup_away_subs)
+
+    # Populating Statistics
+    length = len(response[0]['statistics'])
+    statistics = []
+
+    for i in range(length):
+        stats = {
+         "type": response[0]['statistics'][i]['type'],
+         "home": response[0]['statistics'][i]['home'],
+         "away": response[0]['statistics'][i]['away']
+        }
+        statistics.append(stats)
+
+    return render(request, 'match-details.html', context={'match_info':match_info, 'goalscorer':goalscorer, 'cards':cards, 'lineup_home_starting':lineup_home_starting,'lineup_home_substitutes':lineup_home_substitutes,'home_manager':home_manager,'lineup_home_substitutions':lineup_home_substitutions,'lineup_away_starting':lineup_away_starting,'lineup_away_substitutes':lineup_away_substitutes,'away_manager':away_manager,'lineup_away_substitutions':lineup_away_substitutions,'statistics':statistics})
 
 
 # Converting json date string to custom date format
