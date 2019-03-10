@@ -3,6 +3,7 @@ import requests
 import datetime
 import pytz
 from tzlocal import get_localzone
+import json
 
 
 # Create your views here.
@@ -67,7 +68,78 @@ def get_match_data(request):
 
          match_data.append(match)
 
-    return render(request, 'match.html', context={'match_data':match_data})
+    querystring = {"action":"get_leagues","APIkey":api_key}
+
+    payload = ""
+    headers = {
+        'Authorization': "Basic c2hpZmFuOg==",
+        'cache-control': "no-cache",
+        'Postman-Token': "ac7ecc21-6911-4741-af3e-7411c01b8a9c"
+        }
+
+    response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
+    response = response.json()
+    length = len(response)
+
+    competitions = []
+
+    for i in range(length):
+         league_details = {
+            'league_id':response[i]['league_id'],
+            'league_name':response[i]['league_name']
+         }
+         competitions.append(league_details)
+
+    return render(request, 'match.html', context={'match_data':match_data, 'competitions':competitions})
+
+
+
+# Get specific match details
+def match_details(request, match_id):
+    url = "https://apifootball.com/api/"
+
+    querystring = {"action":"get_events","match_id":match_id,"APIkey":"679b57ce04028d0c3b6d5b1263c48e545ee123234cd101a97397c72ec88daa1b"}
+
+    payload = ""
+    headers = {
+        'Authorization': "Basic c2hpZmFuOg==",
+        'cache-control': "no-cache",
+        'Postman-Token': "ac7ecc21-6911-4741-af3e-7411c01b8a9c"
+        }
+
+    response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
+    response = response.json()
+    length = len(response)
+
+
+
+    match_info = {
+        "match_id": response [0]['match_id'],
+        "country_id": response [0]['country_id'],
+        "country_name": response [0]['country_name'],
+        "league_id": response [0]['league_id'],
+        "league_name": response [0]['league_name'],
+        "match_date": response [0]['match_date'],
+        "match_status":response [0]['match_status'],
+        "match_time":response [0]['match_time'],
+        "match_hometeam_name":response [0]['match_hometeam_name'],
+        "match_hometeam_score":response [0]['match_hometeam_score'],
+        "match_awayteam_name":response [0]['match_awayteam_name'],
+        "match_awayteam_score":response [0]['match_awayteam_score'],
+        "match_hometeam_halftime_score":response [0]['match_hometeam_halftime_score'],
+        "match_awayteam_halftime_score": response [0]['match_awayteam_halftime_score'],
+        "match_hometeam_extra_score":response [0]['match_hometeam_extra_score'],
+        "match_awayteam_extra_score":response [0]['match_awayteam_extra_score'],
+        "match_hometeam_penalty_score":response [0]['match_hometeam_penalty_score'],
+        "match_awayteam_penalty_score": response [0]['match_awayteam_penalty_score'],
+        "match_hometeam_system": response [0]['match_hometeam_system'],
+        "match_awayteam_system": response [0]['match_awayteam_system'],
+        "match_live": response [0]['match_live'],
+
+    }
+
+
+    return render(request, 'match-details.html', context={'match_info':match_info})
 
 
 # Converting json date string to custom date format
