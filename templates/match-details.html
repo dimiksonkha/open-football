@@ -6,7 +6,9 @@
 	</head>
 	<body>
 		<div class="col-md-7">
-			<b>Match Information:</b>{{match_info}}
+			<b>Overview:</b>
+			<a href="#">{{match_info.league_name}}</a>
+			{{match_info}}
 			<br>
 			<hr>
 			<b>Goalscorer:</b>{{goalscorer}}
@@ -39,10 +41,23 @@
 			<b>Lineup Away Substitutions:</b>{{lineup_away_substitutions}}
 			<br>
 			<hr>
-			<b>Statistics:</b>{{statistics}}
-
-
-
+			<b>Statistics:</b>
+			{% if statistics %}
+			<table>
+			  <tr>
+			    <th>{{match_info.match_hometeam_name}}</th>
+			    <th>Team Stats</th>
+			    <th>{{match_info.match_awayteam_name | safe }}</th>
+			  </tr>
+				{% for stats in statistics %}
+			  <tr>
+			    <td>{{stats.home}}</td>
+			    <td>{{stats.type}}</td>
+			    <td>{{stats.away}}</td>
+			  </tr>
+				{% endfor %}
+			{% endif %}
+			</table>
 
 		</div>
 	</body>

@@ -52,21 +52,28 @@ def get_match_data(request):
     length = len(response)
 
     match_data = []
+    match_error = {}
 
-    for i in range(length):
-         match = {
-            'match_id' : response[i]['match_id'],
-            'match_status' : response[i]['match_status'],
-            'match_date' : date_format(response[i]['match_date']),
-            'match_time' : time_format(response[i]['match_date'],response[i]['match_time']),
-            'home_team' : response[i]['match_hometeam_name'],
-            'home_team_score' : response[i]['match_hometeam_score'],
-            'away_team' : response[i]['match_awayteam_name'],
-            'away_team_score' : response[i]['match_awayteam_score']
+    try:
+        for i in range(length):
+             match = {
+                'match_id' : response[i]['match_id'],
+                'match_status' : response[i]['match_status'],
+                'match_date' : date_format(response[i]['match_date']),
+                'match_time' : time_format(response[i]['match_date'],response[i]['match_time']),
+                'home_team' : response[i]['match_hometeam_name'],
+                'home_team_score' : response[i]['match_hometeam_score'],
+                'away_team' : response[i]['match_awayteam_name'],
+                'away_team_score' : response[i]['match_awayteam_score']
 
-         }
+             }
 
-         match_data.append(match)
+             match_data.append(match)
+
+    except:
+        match_error = {
+            'message' : response['message']
+        }
 
     querystring = {"action":"get_leagues","APIkey":api_key}
 
@@ -90,7 +97,7 @@ def get_match_data(request):
          }
          competitions.append(league_details)
 
-    return render(request, 'match.html', context={'match_data':match_data, 'competitions':competitions})
+    return render(request, 'match.html', context={'match_data':match_data,'match_error':match_error, 'competitions':competitions})
 
 
 

@@ -25,25 +25,30 @@
 			</form>
 
 		   <table>
-		   	{% for match in match_data %}
-				<tr>
-		   		<td>{{match.home_team | safe }}</td>
-					<td>{{match.home_team_score}}:{{match.away_team_score}}</td>
-					<td>{{match.away_team | safe }}</td>
-					{% if match.match_status %}
-					<!--  have to write code when game is live-->
-					<td>{{match.match_status}}</td>
-					{% else %}
-					<td>
-						{{match.match_date}} <br>
-						{{match.match_time}}
-					</td>
-					{% endif %}
-					<td><button class="btn"><a href="/football/matches/{{match.match_id}}">Match Details</a></button></td>
+		   	{% if match_data %}
+				{% for match in match_data %}
+					<tr>
+						<td>{{match.home_team | safe }}</td>
+						<td>{{match.home_team_score}}:{{match.away_team_score}}</td>
+						<td>{{match.away_team | safe }}</td>
+						{% if match.match_status %}
+						<!--  have to write code when game is live-->
+						<td>{{match.match_status}}</td>
+						{% else %}
+						<td>
+							{{match.match_date}} <br>
+							{{match.match_time}}
+						</td>
+						{% endif %}
+						<td><button class="btn"><a href="/football/matches/{{match.match_id}}">Match Details</a></button></td>
 
-		   	</tr>
+					</tr>
 				{% endfor %}
 
+				{% else %}
+				 <p>{{match_error.message }} Please select another date ranage!</p>
+
+				{% endif %}
 		   </table>
 
 		</div>
