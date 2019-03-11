@@ -20,44 +20,81 @@
 				</ul>
 			</p>
 			</div>
+			<br>
+			<hr>
+
 			<div id="timeline">
+				<b>Timeline:</b>
 
+				<p>SECOND HALF: 45'</p>
+				<p>HALF TIME:{{match_info.match_hometeam_name | safe }}   {{match_info.match_hometeam_halftime_score}}    -    {{match_info.match_awayteam_halftime_score}}  {{match_info.match_awayteam_name | safe }}</p>
+				<p>KICK OFF:{{match_info.match_time}} </p>
+				<!-- This data will be used to manipulate timeline data  -->
+				<p><b>Goalscorer:</b>{{goalscorer}}</p>
+				<p><b>Cards:</b>{{cards}}</p>
+				<p><b>Lineup Home Substitutions:</b>{{lineup_home_substitutions}}</p>
+				<p><b>Lineup Away Substitutions:</b>{{lineup_away_substitutions}}</p>
 
+				<br>
+				<hr>
 			</div>
-			<div id="linepus">
-				<br>
-				<hr>
-				<b>Goalscorer:</b>{{goalscorer}}
-				<br>
-				<hr>
-				<b>Cards:</b>{{cards}}
-				<br>
-				<hr>
-				<b>Home Starting Lineup:</b>{{lineup_home_starting}}
-				<br>
-				<hr>
-				<b>Home Substitutes Lineup:</b>{{lineup_home_substitutes}}
-				<br>
-				<hr>
-				<b>Home Manager:</b>{{home_manager}}
-				<br>
-				<hr>
-				<b>Lineup Home Substitutions:</b>{{lineup_home_substitutions}}
-				<br>
-				<hr>
-				<b>Away Starting Lineup:</b>{{lineup_away_starting}}
-				<br>
-				<hr>
-				<b>Away Substitutes Lineup:</b>{{lineup_away_substitutes}}
-				<br>
-				<hr>
-				<b>Away Manager:</b>{{away_manager}}
-				<br>
-				<hr>
-				<b>Lineup Away Substitutions:</b>{{lineup_away_substitutions}}
-				<br>
-				<hr>
 
+			<div id="linepus">
+				<b>Lineups:</b>
+				<p>{{match_info.match_hometeam_name | safe }}{{match_info.match_hometeam_system }}</p>
+				<p><b>Home Starting Lineup:</b>{{lineup_home_starting}}</p>
+				<p><b>Away Starting Lineup:</b>{{lineup_away_starting}}</p>
+				<p>{{match_info.match_awayteam_name	 | safe }}{{match_info.match_awayteam_system }}</p>
+
+				<div class="substitutes">
+
+					<table>
+						<tr>
+							<th>{{match_info.match_hometeam_name}}</th>
+							<th>SUBSTITUES</th>
+							<th>{{match_info.match_awayteam_name | safe }}</th>
+						</tr>
+
+
+							{% if lineup_home_substitutes %}
+							{% for subs in lineup_home_substitutes %}
+							<tr>
+							<td>{{subs.lineup_player}}</td>
+							</tr>
+							{% endfor %}
+							{% endif %}
+							<td></td>
+							{% if lineup_away_substitutes %}
+							{% for subs in lineup_away_substitutes %}
+							<tr>
+							<td>{{subs.lineup_player}}</td>
+							</tr>
+							{% endfor %}
+							{% endif %}
+
+
+					</table>
+
+				</div>
+
+				<div class="manager">
+
+					<table>
+						<tr>
+							<th>{{match_info.match_hometeam_name}}</th>
+							<th>MANAGER</th>
+							<th>{{match_info.match_awayteam_name | safe }}</th>
+						</tr>
+						<tr>
+							<td>{{home_manager.lineup_player}}</td>
+							<td></td>
+							<td>{{away_manager.lineup_player}}</td>
+						</tr>
+					</table>
+
+				</div>
+				<br>
+				<hr>
 			</div>
 
 

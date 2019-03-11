@@ -128,7 +128,7 @@ def match_details(request, match_id):
         "league_name": response [0]['league_name'],
         "match_date": date_format(response [0]['match_date']),
         "match_status":status_format(response [0]['match_status']),
-        "match_time":response [0]['match_time'],
+        "match_time":time_format(response [0]['match_date'],response [0]['match_time']),
         "match_hometeam_name":response [0]['match_hometeam_name'],
         "match_hometeam_score":response [0]['match_hometeam_score'],
         "match_awayteam_name":response [0]['match_awayteam_name'],
@@ -333,7 +333,7 @@ def status_format(status):
         return "Full Time"
     else:
         return status
-    
+
 # Tell if a given day is next_day of today
 def is_next_day(day):
 
