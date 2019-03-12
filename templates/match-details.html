@@ -112,7 +112,7 @@
 							<th>{{match_info.match_awayteam_name | safe }}</th>
 						</tr>
 
-						{{lineup_home_substitutes}}
+
 							{% if lineup_home_substitutes %}
 							{% for subs in lineup_home_substitutes %}
 							<tr>
@@ -120,11 +120,11 @@
 							</tr>
 							{% endfor %}
 							{% endif %}
-							<td></td>
+							<td>---------------------------</td>
 							{% if lineup_away_substitutes %}
 							{% for subs in lineup_away_substitutes %}
 							<tr>
-							<td>{{subs.lineup_player}}</td>
+							<td>{{subs.lineup_number}}{{subs.lineup_player}}</td>
 							</tr>
 							{% endfor %}
 							{% endif %}
