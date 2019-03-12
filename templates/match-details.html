@@ -40,10 +40,56 @@
 			</div>
 
 			<div id="linepus">
+
 				<b>Lineups:</b>
 				<p>{{match_info.match_hometeam_name | safe }}{{match_info.match_hometeam_system }}</p>
-				<p><b>Home Starting Lineup:</b>{{lineup_home_starting}}</p>
-				<p><b>Away Starting Lineup:</b>{{lineup_away_starting}}</p>
+				<table>
+					<tr>
+
+					{% for linepus in lineup_home_starting %}
+
+						<td>{{linepus.lineup_number}}{{linepus.lineup_player}}</td>
+					{% if linepus.lineup_position == '1' %}
+				</tr>
+				<tr>
+					{% elif linepus.lineup_position == match_home_row.one %}
+
+				</tr>
+				<tr>
+					{% elif linepus.lineup_position == match_home_row.two %}
+				</tr>
+				<tr>
+
+					{% endif %}
+
+					{% endfor %}
+				</tr>
+				</table>
+				-------------------------------------------------------
+				<table>
+					<tr>
+
+					{% for linepus in lineup_away_starting %}
+
+						<td>{{linepus.lineup_number}}{{linepus.lineup_player}}</td>
+
+					{% if linepus.lineup_position == match_away_row.one %}
+
+				</tr>
+				<tr>
+					{% elif linepus.lineup_position == match_away_row.two %}
+				</tr>
+				<tr>
+					{% elif linepus.lineup_position == match_away_row.three %}
+				</tr>
+				<tr>
+
+					{% endif %}
+
+					{% endfor %}
+				</tr>
+				</table>
+				
 				<p>{{match_info.match_awayteam_name	 | safe }}{{match_info.match_awayteam_system }}</p>
 
 				<div class="substitutes">

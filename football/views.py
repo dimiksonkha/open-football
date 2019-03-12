@@ -145,6 +145,24 @@ def match_details(request, match_id):
 
     }
 
+    # Setting up home team player postion in row according to team format
+    match_home_format = match_info['match_hometeam_system'].split('-')
+    match_home_row = {
+    'one' : str(int(match_home_format[0]) + 1),
+    'two': str(int(match_home_format[0]) + 1 + int(match_home_format [1]))
+    }
+
+    # Setting up away team player postion in row according to team format
+    match_away_format = match_info['match_awayteam_system'].split('-')
+
+    match_away_row = {
+    'one' : str((11-int(match_away_format[2]))+1),
+    'two': str(11-(int(match_away_format[2])+int(match_away_format[1]))+1),
+    'three':str(11-(int(match_away_format[2])+int(match_away_format[1])+int(match_away_format[0]))+1),
+    }
+
+
+
     # Populating Goalscorer Information
     length = len(response[0]['goalscorer'])
     goalscorer = []
@@ -267,7 +285,7 @@ def match_details(request, match_id):
         }
         statistics.append(stats)
 
-    return render(request, 'match-details.html', context={'match_info':match_info, 'goalscorer':goalscorer, 'cards':cards, 'lineup_home_starting':lineup_home_starting,'lineup_home_substitutes':lineup_home_substitutes,'home_manager':home_manager,'lineup_home_substitutions':lineup_home_substitutions,'lineup_away_starting':lineup_away_starting,'lineup_away_substitutes':lineup_away_substitutes,'away_manager':away_manager,'lineup_away_substitutions':lineup_away_substitutions,'statistics':statistics})
+    return render(request, 'match-details.html', context={'match_info':match_info, 'goalscorer':goalscorer, 'cards':cards, 'lineup_home_starting':lineup_home_starting,'lineup_home_substitutes':lineup_home_substitutes,'home_manager':home_manager,'lineup_home_substitutions':lineup_home_substitutions,'lineup_away_starting':lineup_away_starting,'lineup_away_substitutes':lineup_away_substitutes,'away_manager':away_manager,'lineup_away_substitutions':lineup_away_substitutions,'statistics':statistics,'match_home_row':match_home_row,'match_away_row':match_away_row})
 
 
 # Converting json date string to custom date format
