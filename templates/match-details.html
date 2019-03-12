@@ -13,10 +13,21 @@
 			<p><a href="#">{{match_info.league_name}}</a>.{{match_info.match_date}} {{match_info.match_status}}</p>
 			<p>{{match_info.match_hometeam_name | safe }}   {{match_info.match_hometeam_score}}    -    {{match_info.match_awayteam_score}}  {{match_info.match_awayteam_name | safe }}</p>
 			<p>
-				<ul style="list-style-type:none">
+				<ul style="list-style-type:none; display:inline">
 					{% for scorer in goalscorer %}
-						<li>{{scorer.home_scorer | safe }}{{scorer.away_scorer | safe }} {{scorer.time}}</li>
+						{% if scorer.home_scorer != ""  %}
+						<li>{{scorer.home_scorer | safe }} {{scorer.time}}</li>
+						{% endif %}
 					{% endfor %}
+				</ul>
+				------------------------------------
+				<ul style="list-style-type:none; display:inline">
+					{% for scorer in goalscorer %}
+						{% if scorer.away_scorer != "" %}
+							<li>{{scorer.away_scorer | safe }} {{scorer.time}}</li>
+						{% endif %}
+					{% endfor %}
+
 				</ul>
 			</p>
 			</div>
@@ -89,7 +100,7 @@
 					{% endfor %}
 				</tr>
 				</table>
-				
+
 				<p>{{match_info.match_awayteam_name	 | safe }}{{match_info.match_awayteam_system }}</p>
 
 				<div class="substitutes">
@@ -101,11 +112,11 @@
 							<th>{{match_info.match_awayteam_name | safe }}</th>
 						</tr>
 
-
+						{{lineup_home_substitutes}}
 							{% if lineup_home_substitutes %}
 							{% for subs in lineup_home_substitutes %}
 							<tr>
-							<td>{{subs.lineup_player}}</td>
+							<td>{{subs.lineup_number}}{{subs.lineup_player}}</td>
 							</tr>
 							{% endfor %}
 							{% endif %}
