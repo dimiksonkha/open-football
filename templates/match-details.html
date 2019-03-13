@@ -41,8 +41,38 @@
 				<p>HALF TIME:{{match_info.match_hometeam_name | safe }}   {{match_info.match_hometeam_halftime_score}}    -    {{match_info.match_awayteam_halftime_score}}  {{match_info.match_awayteam_name | safe }}</p>
 				<p>KICK OFF:{{match_info.match_time}} </p>
 				<!-- This data will be used to manipulate timeline data  -->
-				<p><b>Goalscorer:</b>{{goalscorer}}</p>
-				<p><b>Cards:</b>{{cards}}</p>
+				{% if events %}
+					{% for event in events %}
+						{% if event.type == 'goal' %}
+							<p>GOOOAAALLL!!!</p>
+							<p>{{event.time}}</p>
+							<p>{{match_info.match_hometeam_name | safe }} {{event.score}} {{match_info.match_awayteam_name | safe }}</p>
+							<p>
+								{% if event.home_scorer != "" %}
+									<p>{{event.home_scorer}}</p>
+									<p>{{match_info.match_hometeam_name | safe }}</p>
+								{% else %}
+									<p>{{event.away_scorer}}</p>
+									<p>{{match_info.match_awayteam_name | safe }}</p>
+								{% endif %}
+								------------------------------------
+						{% elif event.type == 'card' %}
+							<p>{{event.card}}</p>
+							<p>{{event.time}}</p>
+							{% if event.home_fault != "" %}
+								<p>{{event.home_fault}}</p>
+								<p>{{match_info.match_hometeam_name}}</p>
+							{% else %}
+								<p>{{event.away_fault}}</p>
+								<p>{{match_info.match_awayteam_name}}</p>
+							{% endif %}
+							--------------------------------------
+						{% else %}
+						<p>No event found!!!</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+
 				<p><b>Lineup Home Substitutions:</b>{{lineup_home_substitutions}}</p>
 				<p><b>Lineup Away Substitutions:</b>{{lineup_away_substitutions}}</p>
 
@@ -82,7 +112,14 @@
 
 					{% for linepus in lineup_away_starting %}
 
-						<td>{{linepus.lineup_number}}{{linepus.lineup_player}}</td>
+					{% if linepus.lineup_player in player_outs %}
+					<td>{{linepus.lineup_number}}{{linepus.lineup_player}}></td>
+					{% else %}
+					<td>{{linepus.lineup_number}}{{linepus.lineup_player}}</td>
+					{% endif %}
+
+
+
 
 					{% if linepus.lineup_position == match_away_row.one %}
 
@@ -102,6 +139,8 @@
 				</table>
 
 				<p>{{match_info.match_awayteam_name	 | safe }}{{match_info.match_awayteam_system }}</p>
+				{{player_outs}}
+
 
 				<div class="substitutes">
 
@@ -128,6 +167,8 @@
 							</ul>
 							{% endfor %}
 							{% endif %}
+
+									{{player_ins}}
 				</div>
 
 				<div class="manager">
