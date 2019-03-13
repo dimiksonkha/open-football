@@ -105,8 +105,8 @@
 
 				<div class="substitutes">
 
-					<table>
-						<tr>
+
+
 							<th>{{match_info.match_hometeam_name}}</th>
 							<th>SUBSTITUES</th>
 							<th>{{match_info.match_awayteam_name | safe }}</th>
@@ -115,23 +115,19 @@
 
 							{% if lineup_home_substitutes %}
 							{% for subs in lineup_home_substitutes %}
-							<tr>
-							<td>{{subs.lineup_number}}{{subs.lineup_player}}</td>
-							</tr>
+							<ul style="list-style-type:none">
+							<li>{{subs.lineup_number}}{{subs.lineup_player}}</li>
+							</ul>
 							{% endfor %}
 							{% endif %}
-							<td>---------------------------</td>
+							---------------------------
 							{% if lineup_away_substitutes %}
 							{% for subs in lineup_away_substitutes %}
-							<tr>
-							<td>{{subs.lineup_number}}{{subs.lineup_player}}</td>
-							</tr>
+							<ul style="list-style-type:none">
+							<li>{{subs.lineup_number}}{{subs.lineup_player}}</li>
+							</ul>
 							{% endfor %}
 							{% endif %}
-
-
-					</table>
-
 				</div>
 
 				<div class="manager">
