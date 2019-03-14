@@ -179,6 +179,8 @@ def match_details(request, match_id):
 
 
     events = []
+    player_ins = []
+    player_outs = []
     # Populating timeline
     timeline=["1'","2'","3'","4'","5'","6'","7'","8'","9'","10'","11'","12'","13'","14'","15'","16'","17'","18'","19'","20'","21'","22'","23'","24'","25'","26'","27'","28'","29'","30'","31'","32'","33'","34'","35'","36'","37'","38'","39'","40'","41'","42'","43'","44'","45'","46'","47'","48'","49'","50'","51'","52'","53'","54'","55'","56'","57'","58'","59'","60'","61'","62'","63'","64'","65'","66'","67'","68'","69'","70'","71'","72'","73'","74'","75'","76'","77'","78'","79'","80'","81'","82'","83'","84'","85'","86'","87'","88'","89'","90'","91'","92'","93'","94'","95'","96'"] # time upto 96 , miniutes
     for i in range(len(timeline)):
@@ -209,8 +211,44 @@ def match_details(request, match_id):
                 }
                 events.append(event)
 
+        for l in range(len(response[0]['lineup']['home']['substitutions'])):
+            if timeline[i] == response[0]['lineup']['home']['substitutions'][l]['lineup_time']:
+
+                event = {
+                'type':'substitution',
+                "lineup_player_in":player_in(response[0]['lineup']['home']['substitutions'][l]['lineup_player']),
+                "lineup_player_out":player_out(response[0]['lineup']['home']['substitutions'][l]['lineup_player']),
+                "lineup_number": response[0]['lineup']['home']['substitutions'][l]['lineup_number'],
+                "lineup_position":response[0]['lineup']['home']['substitutions'][l]['lineup_position'],
+                "time":response[0]['lineup']['home']['substitutions'][l]['lineup_time'],
+                "team_name":match_info['match_hometeam_name']
+                }
+                events.append(event)
+                player_ins.append(event['lineup_player_in'])
+                player_outs.append(event['lineup_player_out'])
+
+
+        for m in range(len(response[0]['lineup']['away']['substitutions'])):
+            if timeline[i] == response[0]['lineup']['away']['substitutions'][m]['lineup_time']:
+
+                event = {
+                'type':'substitution',
+                "lineup_player_in":player_in(response[0]['lineup']['away']['substitutions'][m]['lineup_player']),
+                "lineup_player_out":player_out(response[0]['lineup']['away']['substitutions'][m]['lineup_player']),
+                "lineup_number": response[0]['lineup']['away']['substitutions'][m]['lineup_number'],
+                "lineup_position":response[0]['lineup']['away']['substitutions'][m]['lineup_position'],
+                "time":response[0]['lineup']['away']['substitutions'][m]['lineup_time'],
+                "team_name":match_info['match_awayteam_name']
+                }
+                events.append(event)
+                player_ins.append(event['lineup_player_in'])
+                player_outs.append(event['lineup_player_out'])
 
     events.reverse()
+
+    # Saving player list as String
+    player_outs=player_subs_format(player_outs)
+    player_ins =player_subs_format(player_ins)
 
     # Populating Starting Lineup for home team
     length = len(response[0]['lineup']['home']['starting_lineups'])
@@ -240,24 +278,6 @@ def match_details(request, match_id):
     # Populating Coach/Manager Lineup for home team
     home_manager = response[0]['lineup']['home']['coach'][0]
 
-    # Populating Substitutions Lineup for home team
-    length = len(response[0]['lineup']['home']['substitutions'])
-    lineup_home_substitutions = []
-    player_ins = []
-    player_outs = []
-
-    for i in range(length):
-        lineup_home_subs = {
-         "lineup_player_in":player_in(response[0]['lineup']['home']['substitutions'][i]['lineup_player']),
-         "lineup_player_out":player_out(response[0]['lineup']['home']['substitutions'][i]['lineup_player']),
-         "lineup_number": response[0]['lineup']['home']['substitutions'][i]['lineup_number'],
-         "lineup_position":response[0]['lineup']['home']['substitutions'][i]['lineup_position'],
-         "lineup_time":response[0]['lineup']['home']['substitutions'][i]['lineup_time']
-        }
-        lineup_home_substitutions.append(lineup_home_subs)
-        player_ins.append(lineup_home_subs['lineup_player_in'])
-        player_outs.append(lineup_home_subs['lineup_player_out'])
-
     # Populating Starting Lineup for away team
     length = len(response[0]['lineup']['away']['starting_lineups'])
     lineup_away_starting = []
@@ -286,22 +306,6 @@ def match_details(request, match_id):
     # Populating Coach/Manager Lineup for away team
     away_manager = response[0]['lineup']['away']['coach'][0]
 
-    # Populating Substitutions Lineup for away team
-    length = len(response[0]['lineup']['away']['substitutions'])
-    lineup_away_substitutions = []
-
-    for i in range(length):
-        lineup_away_subs = {
-         "lineup_player_in": player_in(response[0]['lineup']['away']['substitutions'][i]['lineup_player']),
-         "lineup_player_out": player_out(response[0]['lineup']['away']['substitutions'][i]['lineup_player']),
-         "lineup_number": response[0]['lineup']['away']['substitutions'][i]['lineup_number'],
-         "lineup_position":response[0]['lineup']['away']['substitutions'][i]['lineup_position'],
-         "lineup_time":response[0]['lineup']['away']['substitutions'][i]['lineup_time']
-        }
-        lineup_away_substitutions.append(lineup_away_subs)
-        player_ins.append(lineup_away_subs['lineup_player_in'])
-        player_outs.append(lineup_away_subs['lineup_player_out'])
-
     # Populating Statistics
     length = len(response[0]['statistics'])
     statistics = []
@@ -313,12 +317,9 @@ def match_details(request, match_id):
          "away": response[0]['statistics'][i]['away']
         }
         statistics.append(stats)
-        
-    # Saving player list as String
-    player_outs=player_subs_format(player_outs)
-    player_ins =player_subs_format(player_ins)
 
-    return render(request, 'match-details.html', context={'match_info':match_info, 'goalscorer':goalscorer,  'lineup_home_starting':lineup_home_starting,'lineup_home_substitutes':lineup_home_substitutes,'home_manager':home_manager,'lineup_home_substitutions':lineup_home_substitutions,'lineup_away_starting':lineup_away_starting,'lineup_away_substitutes':lineup_away_substitutes,'away_manager':away_manager,'lineup_away_substitutions':lineup_away_substitutions,'statistics':statistics,'match_home_row':match_home_row,'match_away_row':match_away_row,'events':events, 'player_ins':player_ins, 'player_outs':player_outs})
+
+    return render(request, 'match-details.html', context={'match_info':match_info, 'goalscorer':goalscorer,  'lineup_home_starting':lineup_home_starting,'lineup_home_substitutes':lineup_home_substitutes,'home_manager':home_manager,'lineup_away_starting':lineup_away_starting,'lineup_away_substitutes':lineup_away_substitutes,'away_manager':away_manager,'statistics':statistics,'match_home_row':match_home_row,'match_away_row':match_away_row,'events':events, 'player_ins':player_ins, 'player_outs':player_outs})
 
 
 # Converting json date string to custom date format
@@ -335,7 +336,7 @@ def date_format(date):
     elif is_next_day(day):
          return "Tommorow"
     else:
-        return weekDay(year,month,day) + "," +str(month) +"/"+ str(day) # have to work here
+        return week_day(year,month,day) + "," +str(month) +"/"+ str(day) # have to work here
 
 # Converting json time string to custom time format
 def time_format(date, time):
@@ -433,8 +434,8 @@ def is_leap_year(year):
     else:
         return False
 
-# Find day of week
-def weekDay(year, month, day):
+# Find day of week.modified from stackoverflow
+def week_day(year, month, day):
     offset = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
     week   = ['Sun',
               'Mon',
@@ -443,16 +444,16 @@ def weekDay(year, month, day):
               'Thurs',
               'Fri',
               'Sat']
-    afterFeb = 1
-    if month > 2: afterFeb = 0
-    aux = year - 1700 - afterFeb
+    after_feb = 1
+    if month > 2: after_feb = 0
+    aux = year - 1700 - after_feb
     # dayOfWeek for 1700/1/1 = 5, Friday
-    dayOfWeek  = 5
+    day_of_week  = 5
     # partial sum of days betweem current date and 1700/1/1
-    dayOfWeek += (aux + afterFeb) * 365
+    day_of_week += (aux + after_feb) * 365
     # leap year correction
-    dayOfWeek += aux / 4 - aux / 100 + (aux + 100) / 400
+    day_of_week += aux / 4 - aux / 100 + (aux + 100) / 400
     # sum monthly and day offsets
-    dayOfWeek += offset[month - 1] + (day - 1)
-    dayOfWeek %= 7
-    return week[int(dayOfWeek)]
+    day_of_week += offset[month - 1] + (day - 1)
+    day_of_week %= 7
+    return week[int(day_of_week)]

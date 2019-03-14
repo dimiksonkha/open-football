@@ -67,15 +67,21 @@
 								<p>{{match_info.match_awayteam_name}}</p>
 							{% endif %}
 							--------------------------------------
+							{% elif event.type == 'substitution' %}
+								<p>SUBSTITUTION                       {{event.time}}</p>
+								<p>IN</p>
+								<p>{{event.lineup_player_in}}</p>
+								<p>{{event.team_name}}</p>
+
+								<p>OUT</p>
+								<p>{{event.lineup_player_out}}</p>
+								<p>{{event.team_name |safe }}</p>
+								--------------------------------------
 						{% else %}
 						<p>No event found!!!</p>
 						{% endif %}
 					{% endfor %}
 				{% endif %}
-
-				<p><b>Lineup Home Substitutions:</b>{{lineup_home_substitutions}}</p>
-				<p><b>Lineup Away Substitutions:</b>{{lineup_away_substitutions}}</p>
-
 				<br>
 				<hr>
 			</div>
@@ -115,8 +121,6 @@
 				-------------------------------------------------------
 				<table>
 					<tr>
-						{{player_outs}}
-
 					{% for linepus in lineup_away_starting %}
 
 					{% if linepus.lineup_player in player_outs %}
@@ -153,7 +157,7 @@
 
 							<b>SUBSTITUES</b>
 							<br>
-					
+
 							{{match_info.match_hometeam_name}}
 							{% if lineup_home_substitutes %}
 							{% for subs in lineup_home_substitutes %}
