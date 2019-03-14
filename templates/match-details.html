@@ -89,7 +89,13 @@
 
 					{% for linepus in lineup_home_starting %}
 
-						<td>{{linepus.lineup_number}}{{linepus.lineup_player}}</td>
+					{% if linepus.lineup_player in player_outs %}
+					<td>{{linepus.lineup_number}}{{linepus.lineup_player}}--</td>
+					{% else %}
+					<td>{{linepus.lineup_number}}{{linepus.lineup_player}}</td>
+					{% endif %}
+
+					
 					{% if linepus.lineup_position == '1' %}
 				</tr>
 				<tr>
@@ -109,16 +115,15 @@
 				-------------------------------------------------------
 				<table>
 					<tr>
+						{{player_outs}}
 
 					{% for linepus in lineup_away_starting %}
 
 					{% if linepus.lineup_player in player_outs %}
-					<td>{{linepus.lineup_number}}{{linepus.lineup_player}}></td>
+					<td>{{linepus.lineup_number}}{{linepus.lineup_player}}--</td>
 					{% else %}
 					<td>{{linepus.lineup_number}}{{linepus.lineup_player}}</td>
 					{% endif %}
-
-
 
 
 					{% if linepus.lineup_position == match_away_row.one %}
@@ -139,7 +144,7 @@
 				</table>
 
 				<p>{{match_info.match_awayteam_name	 | safe }}{{match_info.match_awayteam_system }}</p>
-				{{player_outs}}
+
 
 
 				<div class="substitutes">
@@ -167,8 +172,6 @@
 							</ul>
 							{% endfor %}
 							{% endif %}
-
-									{{player_ins}}
 				</div>
 
 				<div class="manager">

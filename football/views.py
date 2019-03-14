@@ -195,7 +195,7 @@ def match_details(request, match_id):
 
                 }
                 events.append(event)
-                print(event)
+
 
         for k in range(len(response[0]['goalscorer'])):
             if timeline[i] == response[0]['goalscorer'][k]['time']:
@@ -208,7 +208,7 @@ def match_details(request, match_id):
                 "away_scorer": response[0]['goalscorer'][k]['away_scorer']
                 }
                 events.append(event)
-                print(event)
+
 
     events.reverse()
 
@@ -313,6 +313,10 @@ def match_details(request, match_id):
          "away": response[0]['statistics'][i]['away']
         }
         statistics.append(stats)
+        
+    # Saving player list as String
+    player_outs=player_subs_format(player_outs)
+    player_ins =player_subs_format(player_ins)
 
     return render(request, 'match-details.html', context={'match_info':match_info, 'goalscorer':goalscorer,  'lineup_home_starting':lineup_home_starting,'lineup_home_substitutes':lineup_home_substitutes,'home_manager':home_manager,'lineup_home_substitutions':lineup_home_substitutions,'lineup_away_starting':lineup_away_starting,'lineup_away_substitutes':lineup_away_substitutes,'away_manager':away_manager,'lineup_away_substitutions':lineup_away_substitutions,'statistics':statistics,'match_home_row':match_home_row,'match_away_row':match_away_row,'events':events, 'player_ins':player_ins, 'player_outs':player_outs})
 
@@ -354,8 +358,6 @@ def time_format(date, time):
 
         hour = local_dt.hour
         minutes = local_dt.minute
-        print(temp_dt_utc)
-        print(local_dt)
 
         if minutes < 10:
             minutes = str(minutes)
@@ -374,7 +376,15 @@ def time_format(date, time):
 
 
 
-# determine which player in or out
+# output player list as string
+def player_subs_format(player_list):
+    output = ""
+    for player in player_list:
+        output += "'" + player + "'" + ","
+    return output
+
+
+#determine which player in or out
 def player_in(player):
     temp_player = player.split('|')
     return temp_player [1]
