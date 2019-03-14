@@ -95,7 +95,7 @@
 					<td>{{linepus.lineup_number}}{{linepus.lineup_player}}</td>
 					{% endif %}
 
-					
+
 					{% if linepus.lineup_position == '1' %}
 				</tr>
 				<tr>
@@ -153,12 +153,16 @@
 
 							<b>SUBSTITUES</b>
 							<br>
-
+					
 							{{match_info.match_hometeam_name}}
 							{% if lineup_home_substitutes %}
 							{% for subs in lineup_home_substitutes %}
 							<ul style="list-style-type:none">
-							<li>{{subs.lineup_number}}{{subs.lineup_player}}</li>
+								{% if subs.lineup_player in player_ins %}
+								<li>{{subs.lineup_number}}{{subs.lineup_player}}^</li>
+								{% else %}
+								<li>{{subs.lineup_number}}{{subs.lineup_player}}</li>
+								{% endif %}
 							</ul>
 							{% endfor %}
 							{% endif %}
@@ -168,7 +172,11 @@
 							{% if lineup_away_substitutes %}
 							{% for subs in lineup_away_substitutes %}
 							<ul style="list-style-type:none">
-							<li>{{subs.lineup_number}}{{subs.lineup_player}}</li>
+								{% if subs.lineup_player in player_ins %}
+								<li>{{subs.lineup_number}}{{subs.lineup_player}}^</li>
+								{% else %}
+								<li>{{subs.lineup_number}}{{subs.lineup_player}}</li>
+								{% endif %}
 							</ul>
 							{% endfor %}
 							{% endif %}
