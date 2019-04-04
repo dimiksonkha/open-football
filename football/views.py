@@ -11,7 +11,7 @@ import json
 # Function to get and process request and response
 def get_match_data(request):
     # Your API_KEY
-    api_key = "679b57ce04028d0c3b6d5b1263c48e545ee123234cd101a97397c72ec88daa1b"
+    api_key = "f1a32bca650c34dd940b273814110fe4082c4067d954486ae56d9bf502ff2458"
 
     # Querystring data recheived via a form in match.html
     # league_id,from_date and to_date

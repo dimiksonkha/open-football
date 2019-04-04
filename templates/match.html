@@ -1,55 +1,140 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>Django Football</title>
+		<link href="{% static "css/bootstrap.min.css" %}"rel="stylesheet" type="text/css">
+		<link href="{% static "css/jquery-ui.css" %}" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+		<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-classic.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css">
+		<style type="text/css">
+
+		</style>
 	</head>
 	<body>
-		<div class="col-md-7">
+		<div class="fulid-container">
+			<div class="row">
+				<div class="col-md-12">
+					<nav class="navbar navbar-light bg-light">
+						<a class="navbar-brand" href="#">Django Football</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<div style="margin-top:20" class="container">
 
 			<form class="" action="{% url 'football:match_data' %}" method="POST">
-					{% csrf_token %}
-				<label for="">Select League:</label>
-				<select name="league_id">
+				{% csrf_token %}
+
+			<div class="row">
+				<div class="col-md-2">
+				</div>
+				<div class="form-group col-md-2">
+				<label for="inputLeague">League</label>
+				<select name="league_id" class="form-control">
 					{% for league in competitions %}
 					<option value="{{league.league_id}}"> {{league.league_name}} </option>
 					{% endfor %}
 				</select>
-				<label for="">From Date:</label>
-				<input type="date" name="from_date" value="">
+				</div>
 
-				<label for="">End Date:</label>
-				<input type="date" name="to_date" value="">
+				<div class="form-group col-md-2">
+					<label for="inputFromDate">From Date</label>
+					<input type="date" name="from_date" class="form-control" id="inputFromDate" placeholder="10/2/2019"></input>
+				</div>
 
-				<input type="submit" value="Show Matches ">
+				<div class="form-group col-md-2">
+					<label for="inputFromDate">To Date </label>
+					<input type="date" name="to_date" class="form-control" id="inputToDate" placeholder="10/2/2019"></input>
+				</div>
+
+				<div class="form-group col-md-2">
+
+					<input type="submit" value="Show Matches" class="btn btn-primary">
+				</div>
+			</div>
+			<div class="col-md-2">
+			</div>
 			</form>
 
-		   <table>
-		   	{% if match_data %}
-				{% for match in match_data %}
-					<tr>
-						<td>{{match.home_team | safe }}</td>
-						<td>{{match.home_team_score}}:{{match.away_team_score}}</td>
-						<td>{{match.away_team | safe }}</td>
-						{% if match.match_status %}
-						<!--  have to write code when game is live-->
-						<td>{{match.match_status}}</td>
-						{% else %}
-						<td>
-							{{match.match_date}} <br>
-							{{match.match_time}}
-						</td>
-						{% endif %}
-						<td><button class="btn"><a href="/football/matches/{{match.match_id}}">Match Details</a></button></td>
+			<div class="row">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-6">
+					<table class="table table-bordered ">
 
-					</tr>
-				{% endfor %}
+						<tbody>
+							{% if match_data %}
+							{% for match in match_data %}
 
-				{% else %}
-				 <p>{{match_error.message }} Please select another date ranage!</p>
+									<a href="/football/matches/{{match.match_id}}">
+										<tr class="table-row" data-href="/football/matches/{{match.match_id}}">
+						          <td>
+						            <div>
+						              <img src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png" alt="" style="width:24;height:24" data-atf="1">
+						              <span style="margin-left:15">{{match.home_team | safe }}</span>
+						            </div>
+						            <div style="margin-top:15">
+						            <img src="https://ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_48x48.png" alt="" style="width:24;height:24"data-atf="1">
+						              <span style="margin-left:15">{{match.away_team | safe }}</span>
+						            </div>
+						          </td>
+						          <td>
+						          <div>
+						            {{match.home_team_score}}
+						          </div>
+						          <div style="margin-top:15">
+						            {{match.away_team_score}}
+						          </div>
+						          </td>
 
-				{% endif %}
-		   </table>
+
+
+						          <td>
+
+
+						            <div class="vl">
+													{% if match.match_status %}
+													<!--  have to write code when game is live-->
+													<div>
+													{{match.match_status}}
+													</div>
+													{% else %}
+													<div>
+					 							 	{{match.match_date}}
+					 							 </div>
+					 							 <div>
+					 							 	{{match.match_time}}
+					 							 </div>
+													{% endif %}
+
+						          </td>
+						        </tr>
+									</a>
+
+
+							{% endfor %}
+
+							{% else %}
+							 <p>{{match_error.message }} Please select another date ranage!</p>
+
+							{% endif %}
+
+
+						</tbody>
+					</table>
+
+
+
+				</div>
+				<div class="col-md-3">
+				</div>
+
+
+			</div>
 
 		</div>
 	</body>
