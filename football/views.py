@@ -105,7 +105,7 @@ def get_match_data(request):
 def match_details(request, match_id):
     url = "https://apifootball.com/api/"
 
-    querystring = {"action":"get_events","match_id":match_id,"APIkey":"679b57ce04028d0c3b6d5b1263c48e545ee123234cd101a97397c72ec88daa1b"}
+    querystring = {"action":"get_events","match_id":match_id,"APIkey":"f1a32bca650c34dd940b273814110fe4082c4067d954486ae56d9bf502ff2458"}
 
     payload = ""
     headers = {
@@ -146,20 +146,28 @@ def match_details(request, match_id):
     }
 
     # Setting up home team player postion in row according to team format
-    match_home_format = match_info['match_hometeam_system'].split('-')
-    match_home_row = {
-    'one' : str(int(match_home_format[0]) + 1),
-    'two': str(int(match_home_format[0]) + 1 + int(match_home_format [1]))
-    }
+    match_home_row = {}
+    try:
+        match_home_format = match_info['match_hometeam_system'].split('-')
+        match_home_row = {
+        'one' : str(int(match_home_format[0]) + 1),
+        'two': str(int(match_home_format[0]) + 1 + int(match_home_format [1]))
+        }
+    except:
+        print("Hello World!")
 
     # Setting up away team player postion in row according to team format
-    match_away_format = match_info['match_awayteam_system'].split('-')
+    match_away_row = {}
+    try:
+        match_away_format = match_info['match_awayteam_system'].split('-')
 
-    match_away_row = {
-    'one' : str((11-int(match_away_format[2]))+1),
-    'two': str(11-(int(match_away_format[2])+int(match_away_format[1]))+1),
-    'three':str(11-(int(match_away_format[2])+int(match_away_format[1])+int(match_away_format[0]))+1),
-    }
+        match_away_row = {
+        'one' : str((11-int(match_away_format[2]))+1),
+        'two': str(11-(int(match_away_format[2])+int(match_away_format[1]))+1),
+        'three':str(11-(int(match_away_format[2])+int(match_away_format[1])+int(match_away_format[0]))+1),
+        }
+    except:
+        print("Hello World!")
 
 
 
@@ -276,7 +284,11 @@ def match_details(request, match_id):
         lineup_home_substitutes.append(lineup_home_subs)
 
     # Populating Coach/Manager Lineup for home team
-    home_manager = response[0]['lineup']['home']['coach'][0]
+    home_manager = ""
+    try:
+        home_manager = response[0]['lineup']['home']['coach'][0]
+    except:
+        print("Hello World!")
 
     # Populating Starting Lineup for away team
     length = len(response[0]['lineup']['away']['starting_lineups'])
@@ -304,7 +316,12 @@ def match_details(request, match_id):
         lineup_away_substitutes.append(lineup_away_subs)
 
     # Populating Coach/Manager Lineup for away team
-    away_manager = response[0]['lineup']['away']['coach'][0]
+    away_manager = ""
+    try:
+        away_manager = response[0]['lineup']['away']['coach'][0]
+    except:
+        print("Hello World!")
+
 
     # Populating Statistics
     length = len(response[0]['statistics'])

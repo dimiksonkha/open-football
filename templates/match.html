@@ -51,7 +51,7 @@
 					<input type="date" name="to_date" class="form-control" id="inputToDate" placeholder="10/2/2019"></input>
 				</div>
 
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-2" style="margin-top:32px">
 
 					<input type="submit" value="Show Matches" class="btn btn-primary">
 				</div>
@@ -64,14 +64,14 @@
 				<div class="col-md-3">
 				</div>
 				<div class="col-md-6">
-					<table class="table table-bordered ">
+					<table class="table table-hover">
 
 						<tbody>
 							{% if match_data %}
 							{% for match in match_data %}
 
-									<a href="/football/matches/{{match.match_id}}">
-										<tr class="table-row" data-href="/football/matches/{{match.match_id}}">
+
+										<tr style="border:0 solid white;" class="table-row" data-href="/football/matches/{{match.match_id}}">
 						          <td>
 						            <div>
 						              <img src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png" alt="" style="width:24;height:24" data-atf="1">
@@ -113,7 +113,7 @@
 
 						          </td>
 						        </tr>
-									</a>
+
 
 
 							{% endfor %}
@@ -137,5 +137,7 @@
 			</div>
 
 		</div>
+		<script src="{% static "js/jquery-3.2.1.min.js" %}" type="text/javascript"></script>
+		<script src="{% static "js/script.js" %}" type="text/javascript"></script>
 	</body>
 </html>
