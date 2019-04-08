@@ -103,6 +103,17 @@
 		</div>
 		<div class="container" style="margin-top:20">
 			<div class="row">
+				<!-- Start Testing Events -->
+				 {% if events %}
+				 	{% for event in events %}
+						{% if event.type == 'goal'%}
+							<p>Substitution Happens!!!!</p>
+						{% else %}
+						{% endif %}
+					{% endfor %}
+				 {% else %}
+				 {% endif %}
+				<!-- End Testing Events -->
 				<!-- Start Testing Timeline  -->
 				<div class="col-md-6">
 					<!-- Full Time -->
@@ -386,7 +397,8 @@
 
 										{% endif %}
 
-										{% elif event.type == 'substitution' %}
+									{% elif event.type == 'substitution' %}
+										<p>SUBSTITUES Happens!</p>
 										<!-- Home Substitution -->
 										<div class="first-team">
 											<table class="soccer-event substitution-event">
@@ -402,7 +414,7 @@
 													<tr class="replacing-player-row tall-row">
 														<td class="left-cell sports-event-player-name-cell imso-loa">
 															<div class="sports-event-player-name-div imso-hide-overflow">
-																<span class="sports-event-player-name ellipsisize">Patrick Roberts</span>
+																<span class="sports-event-player-name ellipsisize">{{event.lineup_player_in}}</span>
 															</div>
 														</td>
 														<td class="middle-cell" rowspan="1">
@@ -410,7 +422,7 @@
 														</td>
 														<td class="right-cell sports-event-player-name-cell imso-loa" data-url="/search?site=async/lr_sma_tb&amp;q=Patrick+Roberts&amp;stick=H4sIAAAAAAAAAONgVuLWz9U3MDQwyDNNz33E6M4t8PLHPWEpu0lrTl5jtODiCs7IL3fNK8ksqRTS4mKDshS4-KWQ9WkwSPFyIQvwLGLlD0gsKcpMzlYIyk9KLSopBgCJC0N8awAAAA" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAC">
 															<div class="sports-event-player-name-div imso-hide-overflow">
-																<span class="sports-event-player-name ellipsisize">Patrick Roberts</span>
+																<span class="sports-event-player-name ellipsisize"></span>
 															</div>
 														</td>
 													</tr>
@@ -432,7 +444,7 @@
 													<tr class="replaced-player-row">
 														<td class="left-cell sports-event-player-name-cell imso-loa" data-url="/search?site=async/lr_sma_tb&amp;q=Borja+Garc%C3%ADa&amp;stick=H4sIAAAAAAAAAONgVuLSz9U3SClOTjesesToyi3w8sc9YSmbSWtOXmM04-IKzsgvd80rySypFNLgYoOy5Lj4pJC0aTBI8XAh8XkWsfI65RdlJSq4JxYlH16bCAB7A-JwZgAAAA" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAD">
 															<div class="sports-event-player-name-div imso-hide-overflow">
-																<span class="sports-event-player-name ellipsisize">Borja García</span>
+																<span class="sports-event-player-name ellipsisize">{{event.lineup_player_out}}</span>
 															</div>
 														</td>
 														<td class="middle-cell" rowspan="2">
