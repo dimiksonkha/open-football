@@ -284,7 +284,7 @@ def match_details(request, match_id):
 
     for i in range(length):
         lineup_home_subs = {
-         "lineup_player": response[0]['lineup']['home']['substitutes'][i]['lineup_player'],
+         "lineup_player": player_in(response[0]['lineup']['home']['substitutes'][i]['lineup_player']),
          "lineup_number": response[0]['lineup']['home']['substitutes'][i]['lineup_number'],
          "lineup_position": response[0]['lineup']['home']['substitutes'][i]['lineup_position']
         }
@@ -316,7 +316,7 @@ def match_details(request, match_id):
 
     for i in range(length):
         lineup_away_subs = {
-         "lineup_player": response[0]['lineup']['away']['substitutes'][i]['lineup_player'],
+         "lineup_player": player_in(response[0]['lineup']['away']['substitutes'][i]['lineup_player']),
          "lineup_number": response[0]['lineup']['away']['substitutes'][i]['lineup_number'],
          "lineup_position": response[0]['lineup']['away']['substitutes'][i]['lineup_position']
         }
@@ -411,8 +411,12 @@ def player_subs_format(player_list):
 
 #determine which player in or out
 def player_in(player):
-    temp_player = player.split('|')
-    return temp_player [1]
+    try:
+        temp_player = player.split('|')
+        return temp_player [1]
+    except:
+        return player
+
 
 def player_out(player):
     temp_player = player.split('|')

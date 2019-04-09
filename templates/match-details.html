@@ -108,8 +108,8 @@
 						<div class="lineup-ground-container">
 							<div class="ground-team">
 								<img  src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png" alt=""></img>
-								<span class="ground-team-home">Leganes</span>
-								<span class="ground-team-format">4-1-4-1</span>
+								<span class="ground-team-home">{{match_info.match_hometeam_name}}</span>
+								<span class="ground-team-format">{{match_info.match_hometeam_system}}</span>
 							</div>
 
 							<div class="lrvl-fl lrvl-tgc"></div>
@@ -367,8 +367,8 @@
 
 							<div class="ground-team">
 								<img  src="//ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_96x96.png" alt=""></img>
-								<span class="ground-team-home">Girona</span>
-								<span class="ground-team-format">4-2-3-1</span>
+								<span class="ground-team-home">{{match_info.match_awayteam_name}}</span>
+								<span class="ground-team-format">{{match_info.match_awayteam_system}}</span>
 							</div>
 
 						</div>
@@ -394,117 +394,38 @@
 					<tbody>
 					<tr>
 						<td>
-							<span style="margin-right:10px">2</span>
-							Juanfran
-							<span></span>
+							{% if lineup_home_substitutes %}
+			        {% for subs in lineup_home_substitutes %}
+			        <ul style="list-style-type:none">
+			          {% if subs.lineup_player in player_ins %}
+			          <li>{{subs.lineup_number}}{{subs.lineup_player}}<img alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-in.svg"></li>
+			          {% else %}
+			          <li>{{subs.lineup_number}}{{subs.lineup_player}}</li>
+			          {% endif %}
+			        </ul>
+			        {% endfor %}
+			        {% endif %}
+
 						</td>
 						<td>
 						</td>
 						<td>
 						</td>
 						<td>
-							<span></span>
-							Gorka Iraizoz
-							<span style="margin-left:10px">1</span>
+							{% if lineup_away_substitutes %}
+			        {% for subs in lineup_away_substitutes %}
+			        <ul style="list-style-type:none">
+			          {% if subs.lineup_player in player_ins %}
+			          <li>{{subs.lineup_number}}{{subs.lineup_player}}^</li>
+			          {% else %}
+			          <li>{{subs.lineup_number}}{{subs.lineup_player}}</li>
+			          {% endif %}
+			        </ul>
+			        {% endfor %}
+			        {% endif %}
 						</td>
 					</tr>
-					<tr>
-						<td>
-							<span style="margin-right:10px">9</span>
-							Guido Carrillo
-							<span></span>
-							<img alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-in.svg"></img>
-						</td>
-						<td>
-						</td>
-						<td>
-						</td>
-						<td>
-							<span></span>
-							Bernardo Espinosa
-							<span style="margin-left:10px">2</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span style="margin-right:10px">10</span>
-							Nabil El Zhar
-							<span></span>
-						</td>
-						<td>
-						</td>
-						<td>
-						</td>
-						<td>
-							<span></span>
-							Jonás Ramalho
-							<span style="margin-left:10px">4</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span style="margin-right:10px">16</span>
-							José Arnaiz
-							<span></span>
-						</td>
-						<td>
-						</td>
-						<td>
-						</td>
-						<td>
-							<span></span>
-							Anthony Lozano
-							<span style="margin-left:10px">19</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span style="margin-right:10px">20</span>
-							<span>Michael Santos</span>
-							<span></span>
-						</td>
-						<td>
-						</td>
-						<td>
-						</td>
-						<td>
-							<span></span>
-							Carles Planas
-							<span style="margin-left:10px">21</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span style="margin-right:10px">23</span>
-							Mikel Vesga
-							<span></span>
-						</td>
-						<td>
-						</td>
-						<td>
-						</td>
-						<td>
-							<span></span>
-							Seydou Doumbia
-							<span style="margin-left:10px">22</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span style="margin-right:10px">29</span>
-							Andriy Lunin
-							<span></span>
-						</td>
-						<td>
-						</td>
-						<td>
-						</td>
-						<td>
-							<span></span>
-							Aleix García
-							<span style="margin-left:10px">23</span>
-						</td>
-					</tr>
+
 					</tbody>
 				</table>
 
@@ -526,7 +447,7 @@
 						</div>
 						<table style="margin-left:35px;margin-top:20px" class="table table-borderless">
 							<tbody>
-								<tr><td>M. Pellegrino</td><td></td><td>Eusebio</td></tr>
+								<tr><td>{{home_manager.lineup_player}}</td><td></td><td>{{away_manager.lineup_player}}</td></tr>
 							</tbody>
 						</table>
 					</div>
