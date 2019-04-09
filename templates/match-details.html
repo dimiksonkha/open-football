@@ -103,491 +103,436 @@
 		</div>
 		<div class="container" style="margin-top:20">
 			<div class="row">
-				<!-- Start Testing Events -->
-				 {% if events %}
-				 	{% for event in events %}
-						{% if event.type == 'goal'%}
-							<p>Substitution Happens!!!!</p>
-						{% else %}
-						{% endif %}
-					{% endfor %}
-				 {% else %}
-				 {% endif %}
-				<!-- End Testing Events -->
-				<!-- Start Testing Timeline  -->
-				<div class="col-md-6">
-					<!-- Full Time -->
-					<div>
-						<div class="divider-text-container topmost-section-divider">
-							<img class="divider-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/whistle.svg" alt=""></img>
-							<div class="divider-text">FULL-TIME</div>
-							<div class="timeline-item-separator"></div>
-						</div>
-						<div>
-							{% if events %}
-								{% for event in events %}
-									{% if event.type == 'goal' %}
-										{% if event.home_scorer != "" %}
-												<!-- Home Goal -->
-											 <div>
-												 <div class="first-team">
-													 <table class="soccer-event shot-or-goal-event">
-														 <tbody>
-															 <tr>
-																 <td class="place-holder-left"></td>
-																 <td class="left-border" rowspan="4"></td>
-																 <td class="top-border-left"></td>
-																 <td class="top-border-right"></td>
-																 <td class="right-border" rowspan="4"></td>
-																 <td class="place-holder-right"></td>
-															 </tr>
-															 <tr class="player-name-row">
-																 <td class="left-cell sports-event-player-name-cell imso-loa">
-																	 <div class="sports-event-player-name-div imso-hide-overflow">
-																		 <span class="inline-game-time">
-																			 <span class="liveresults-sports-immersive__game-minute">
-																				 <span>{{event.time}}</span>
+			<!-- Start Testing  id="lineups" class="tab-pane fade"-->
+					<div class="col-md-6">
+						<div class="lineup-ground-container">
+							<div class="ground-team">
+								<img  src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png" alt=""></img>
+								<span class="ground-team-home">Leganes</span>
+								<span class="ground-team-format">4-1-4-1</span>
+							</div>
 
-																			 </span>
-																		 </span>
-																		 <span class="sports-event-player-name ellipsisize">{{event.home_scorer}}</span>
-																	 </div>
-																 </td>
-																 <td class="middle-cell" rowspan="2">
-																	 <img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
-																 </td>
-																 <td class="right-cell sports-event-player-name-cell imso-loa">
-																	 <div class="sports-event-player-name-div imso-hide-overflow">
-																		 <span class="inline-game-time">
-																			 <span class="liveresults-sports-immersive__game-minute">
-																				 <span>{{event.time}}</span>
-
-																			 </span>
-																		 </span>
-																		 <span class="sports-event-player-name ellipsisize">Rubén Rochina</span>
-																	 </div>
-																 </td>
-															 </tr>
-															 <tr>
-																 <td class="left-cell">
-																	 <div class="additional-info">
-																		 <div class="imso-hide-overflow imso-loa">
-																			 <span class="score">
-																				 <span>
-																					 <span>{{event.score}}</span>
-																				 </span>
-																			</span>
-
-																		 </div>
-																	 </div>
-																 </td>
-																 <td class="right-cell">
-																	 <div class="additional-info">
-																		 <div class="imso-hide-overflow imso-loa">
-																			 <span class="score">
-																				 <span>
-																					 <span></span>
-																				 </span>
-																			 </span>
-
-																		 </div>
-																	 </div>
-																 </td>
-															 </tr>
-															 <tr>
-																 <td class="place-holder-left"></td>
-																 <td class="bottom-border-left"></td>
-																 <td class="bottom-border-right"></td>
-																 <td class="place-holder-right"></td>
-															 </tr>
-														 </tbody>
-													 </table>
-												 </div>
-												 <div class="timeline-item-separator"></div>
-											 </div>
-											{% else %}
-											<!-- Away Goal -->
-											<div>
- 										   <div class="second-team">
- 										     <table class="soccer-event shot-or-goal-event">
- 										       <tbody>
- 										         <tr>
- 										           <td class="place-holder-left"></td>
- 										           <td class="left-border" rowspan="4"></td>
- 										           <td class="top-border-left"></td>
- 										           <td class="top-border-right"></td>
- 										           <td class="right-border" rowspan="4"></td>
- 										           <td class="place-holder-right"></td>
- 										         </tr>
- 										         <tr class="player-name-row">
- 										           <td class="left-cell sports-event-player-name-cell imso-loa">
- 										             <div class="sports-event-player-name-div imso-hide-overflow">
- 										               <span class="inline-game-time">
- 										                 <span class="liveresults-sports-immersive__game-minute">
- 										                   <span></span>
- 										                   <span></span>
- 										                 </span>
- 										               </span>
- 										               <span class="sports-event-player-name ellipsisize"></span>
- 										             </div>
- 										           </td>
- 										           <td class="middle-cell" rowspan="2">
- 										             <img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
- 										           </td>
- 										           <td class="right-cell sports-event-player-name-cell imso-loa">
- 										             <div class="sports-event-player-name-div imso-hide-overflow">
- 										               <span class="inline-game-time">
- 										                 <span class="liveresults-sports-immersive__game-minute">
- 										                   {{event.time}}
- 										                 </span>
- 										               </span>
- 										               <span class="sports-event-player-name ellipsisize">{{event.away_scorer}}</span>
- 										             </div>
- 										           </td>
- 										         </tr>
-														 <tr>
-															 <td className="left-cell">
-																 <div className="additional-info">
-																	 <div className="imso-hide-overflow imso-loa">
-																		 <span className="score">
-																			 <span>
-																				 <span></span>
-																			 </span>
-																		 </span>
-																		 <span> </span>
-
-																	 </div>
-																 </div>
-															 </td>
-															 <td class="right-cell">
-																 <div class="additional-info">
-																	 <div class="imso-hide-overflow imso-loa">
-																		 <span class="score">
-																			 <span>
-																				 {{event.score}}
-																			 </span>
-																		 </span>
-
-																	 </div>
-																 </div>
-															 </td>
-														 </tr>
- 										         <tr>
- 										           <td class="place-holder-left"></td>
- 										           <td class="bottom-border-left"></td>
- 										           <td class="bottom-border-right"></td>
- 										           <td class="place-holder-right"></td>
- 										         </tr>
- 										       </tbody>
- 										     </table>
- 										   </div>
- 										   <div class="timeline-item-separator"></div>
- 										 </div>
-
-
-											{% endif %}
-
-									{% elif event.type == 'card' %}
-
-										{% if event.home_fault != "" %}
-										<!-- Home Card -->
+							<div class="lrvl-fl lrvl-tgc"></div>
+							<div class="lrvl-fl lrvl-tg lrvl-gll"></div>
+							<div class="lrvl-fl lrvl-tg lrvl-gls"></div>
+							<div class="lrvl-fl lrvl-mfc lrvl-vac"></div>
+							<div class="lrvl-mfl lrvl-vac"></div>
+							<div class="lrvl-ls">
+								<div class="lrvl-fr" style="height:20%">
+									<span class="lrvl-pd" style="width:100%">
+										<div class="lrvl-pc imso-loa" aria-label="Goalkeeper" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">1</span>
+										</div>
 										<div>
-											<div class="first-team">
-												<table class="soccer-event other-event">
-													<tbody>
-														<tr>
-															<td class="place-holder-left"></td>
-															<td class="left-border" rowspan="3"></td>
-															<td class="top-border-left"></td>
-															<td class="top-border-right"></td>
-															<td class="right-border" rowspan="3"></td>
-															<td class="place-holder-right"></td>
-														</tr>
-														<tr class="player-name-row tall-row">
-															<td class="left-cell sports-event-player-name-cell imso-loa">
-																<div class="sports-event-player-name-div imso-hide-overflow">
-																	<span class="inline-game-time">
-																		<span class="liveresults-sports-immersive__game-minute">
-																			<span>{{event.time}}</span>
-																		</span>
-																	</span>
-																	<span class="sports-event-player-name ellipsisize">{{event.home_fault}}</span>
-																</div>
-															</td>
-															<td class="middle-cell" rowspan="1">
-																{% if event.card == "yellowcard" %}
-																	<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-left.svg" alt=""/>
-																{% else %}
-																	<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/red-card-left.svg" alt="">
-																{% endif %}
-															</td>
-															<td class="right-cell sports-event-player-name-cell imso-loa">
-																<div class="sports-event-player-name-div imso-hide-overflow">
-																	<span class="inline-game-time">
-																		<span class="liveresults-sports-immersive__game-minute">
-																			<span>83</span>
-																			<span>'</span>
-																		</span>
-																	</span>
-																	<span class="sports-event-player-name ellipsisize">Nikola Vukčević</span>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td class="place-holder-left"></td>
-															<td class="bottom-border-left"></td>
-															<td class="bottom-border-right"></td>
-															<td class="place-holder-right"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-											<div class="timeline-item-separator"></div>
+										<span class="lrvl-pnc">G. Iraizoz</span>
 										</div>
-										{% else %}
-										<!-- Away Card -->
+									</span>
+								</div>
+								<div class="lrvl-fr" style="height:"20%">
+									<span class="lrvl-pd" style="width:"25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">4</span>
+											<img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
+										</div>
 										<div>
-											<div class="second-team">
-												<table class="soccer-event other-event">
-													<tbody>
-														<tr>
-															<td class="place-holder-left"></td>
-															<td class="left-border" rowspan="3"></td>
-															<td class="top-border-left"></td>
-															<td class="top-border-right"></td>
-															<td class="right-border" rowspan="3"></td>
-															<td class="place-holder-right"></td>
-														</tr>
-														<tr class="player-name-row tall-row">
-															<td class="left-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go">
-																<div class="sports-event-player-name-div imso-hide-overflow">
-																	<span class="inline-game-time">
-																		<span class="liveresults-sports-immersive__game-minute">
-																			<span>{{event.time}}</span>
-																		</span>
-																	</span>
-																</div>
-															</td>
-															<td class="middle-cell" rowspan="1">
-																<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg" alt=""></img>
-															</td>
-															<td class="right-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go">
-																<div class="sports-event-player-name-div imso-hide-overflow">
-																	<span class="inline-game-time">
-																		<span class="liveresults-sports-immersive__game-minute">
-																			<span>{{event.time}}</span>
-																		</span>
-																	</span>
-																	<span class="sports-event-player-name ellipsisize">{{event.away_fault}}</span>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td class="place-holder-left"></td>
-															<td class="bottom-border-left"></td>
-															<td class="bottom-border-right"></td>
-															<td class="place-holder-right"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-											<div class="timeline-item-separator"></div>
-
+										<span class="lrvl-pnc">J. Ramalho</span>
 										</div>
+									</span>
 
-										{% endif %}
-
-									{% elif event.type == 'substitution' %}
-										<p>SUBSTITUES Happens!</p>
-										<!-- Home Substitution -->
-										<div class="first-team">
-											<table class="soccer-event substitution-event">
-												<tbody>
-													<tr>
-														<td class="place-holder-left"></td>
-														<td class="left-border" rowspan="6"></td>
-														<td class="top-border-left"></td>
-														<td class="top-border-right"></td>
-														<td class="right-border" rowspan="6"></td>
-														<td class="place-holder-right"></td>
-													</tr>
-													<tr class="replacing-player-row tall-row">
-														<td class="left-cell sports-event-player-name-cell imso-loa">
-															<div class="sports-event-player-name-div imso-hide-overflow">
-																<span class="sports-event-player-name ellipsisize">{{event.lineup_player_in}}</span>
-															</div>
-														</td>
-														<td class="middle-cell" rowspan="1">
-															<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-in.svg" alt=""></img>
-														</td>
-														<td class="right-cell sports-event-player-name-cell imso-loa" data-url="/search?site=async/lr_sma_tb&amp;q=Patrick+Roberts&amp;stick=H4sIAAAAAAAAAONgVuLWz9U3MDQwyDNNz33E6M4t8PLHPWEpu0lrTl5jtODiCs7IL3fNK8ksqRTS4mKDshS4-KWQ9WkwSPFyIQvwLGLlD0gsKcpMzlYIyk9KLSopBgCJC0N8awAAAA" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAC">
-															<div class="sports-event-player-name-div imso-hide-overflow">
-																<span class="sports-event-player-name ellipsisize"></span>
-															</div>
-														</td>
-													</tr>
-													<tr class="separator-row">
-														<td class="left-cell">
-															<div class="separator-line"></div>
-														</td>
-														<td class="middle-cell">
-															<span>
-																<span class="liveresults-sports-immersive__game-minute">
-																	<span>{{event.time}}</span>
-																</span>
-															</span>
-														</td>
-														<td class="right-cell">
-															<div class="separator-line"></div>
-														</td>
-													</tr>
-													<tr class="replaced-player-row">
-														<td class="left-cell sports-event-player-name-cell imso-loa" data-url="/search?site=async/lr_sma_tb&amp;q=Borja+Garc%C3%ADa&amp;stick=H4sIAAAAAAAAAONgVuLSz9U3SClOTjesesToyi3w8sc9YSmbSWtOXmM04-IKzsgvd80rySypFNLgYoOy5Lj4pJC0aTBI8XAh8XkWsfI65RdlJSq4JxYlH16bCAB7A-JwZgAAAA" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAD">
-															<div class="sports-event-player-name-div imso-hide-overflow">
-																<span class="sports-event-player-name ellipsisize">{{event.lineup_player_out}}</span>
-															</div>
-														</td>
-														<td class="middle-cell" rowspan="2">
-															<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg" alt=""></img>
-														</td>
-														<td class="right-cell sports-event-player-name-cell imso-loa" data-url="/search?site=async/lr_sma_tb&amp;q=Borja+Garc%C3%ADa&amp;stick=H4sIAAAAAAAAAONgVuLSz9U3SClOTjesesToyi3w8sc9YSmbSWtOXmM04-IKzsgvd80rySypFNLgYoOy5Lj4pJC0aTBI8XAh8XkWsfI65RdlJSq4JxYlH16bCAB7A-JwZgAAAA" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAE">
-															<div class="sports-event-player-name-div imso-hide-overflow">
-																<span class="sports-event-player-name ellipsisize">Borja García</span>
-															</div>
-														</td>
-													</tr>
-													<tr class="replaced-player-position-row">
-														<td class="left-cell">
-															<div class="additional-info">
-																<div class="imso-hide-overflow imso-loa" role="link" tabindex="0" jsaction="jsa.go" >Midfielder</div>
-															</div>
-														</td>
-														<td class="right-cell">
-															<div class="additional-info">
-																<div class="imso-hide-overflow imso-loa" role="link" tabindex="0" jsaction="jsa.go">Midfielder</div>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td class="place-holder-left"></td>
-														<td class="bottom-border-left"></td>
-														<td class="bottom-border-right"></td>
-														<td class="place-holder-right"></td>
-													</tr>
-												</tbody>
-											</table>
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">5</span>
 										</div>
-										<div class="timeline-item-separator">
-										</div>
-									</div>
-
-										<!-- Away Substitutes -->
-
 										<div>
-											<div class="second-team">
-												<table class="soccer-event substitution-event">
-													<tbody>
-														<tr>
-															<td class="place-holder-left"></td>
-															<td class="left-border" rowspan="6"></td>
-															<td class="top-border-left"></td>
-															<td class="top-border-right"></td>
-															<td class="right-border" rowspan="6"></td>
-															<td class="place-holder-right"></td>
-														</tr>
-														<tr class="replacing-player-row tall-row">
-															<td class="left-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go">
-																<div class="sports-event-player-name-div imso-hide-overflow">
-																	<span class="sports-event-player-name ellipsisize">{{event.lineup_player_in}}</span>
-																</div>
-															</td>
-															<td class="middle-cell" rowspan="1">
-																<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-in.svg" alt=""></img>
-															</td>
-															<td class="right-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go">
-																<div class="sports-event-player-name-div imso-hide-overflow">
-																	<span class="sports-event-player-name ellipsisize">{{event.lineup_player_out}}</span>
-																</div>
-															</td>
-														</tr>
-														<tr class="separator-row">
-															<td class="left-cell">
-																<div class="separator-line"></div>
-															</td>
-															<td class="middle-cell">
-																<span>
-																	<span class="liveresults-sports-immersive__game-minute">
-																		<span>{{event.time}}</span>
-																	</span>
-																</span>
-															</td>
-															<td class="right-cell">
-																<div class="separator-line"></div>
-															</td>
-														</tr>
-														<tr class="replaced-player-row">
-															<td class="left-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAJ">
-																<div class="sports-event-player-name-div imso-hide-overflow">
-																	<span class="sports-event-player-name ellipsisize">{{event.lineup_player_in}}</span>
-																</div>
-															</td>
-															<td class="middle-cell" rowspan="2">
-																<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg" alt=""></img>
-															</td>
-															<td class="right-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go" >
-																<div class="sports-event-player-name-div imso-hide-overflow">
-																	<span class="sports-event-player-name ellipsisize">{{event.lineup_player_out}}</span>
-																</div>
-															</td>
-														</tr>
-														<tr class="replaced-player-position-row">
-															<td class="left-cell">
-																<div class="additional-info">
-																	<div class="imso-hide-overflow imso-loa" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAL">Midfielder</div>
-																</div>
-															</td>
-															<td class="right-cell">
-																<div class="additional-info">
-																	<div class="imso-hide-overflow imso-loa" role="link" tabindex="0" jsaction="jsa.go">Midfielder</div>
-																</div>
-															</td>
-														</tr>
-														<tr>
-															<td class="place-holder-left"></td>
-															<td class="bottom-border-left"></td>
-															<td class="bottom-border-right"></td>
-															<td class="place-holder-right"></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-											<div class="timeline-item-separator">
-											</div>
+										<span class="lrvl-pnc">J. Ramalho</span>
 										</div>
-									{% else %}
-									<p>No event found!!!</p>
-									{% endif %}
-								{% endfor %}
-							{% endif %}
+									</span>
 
-						<!--  Half Time-->
-						<div class="divider-text-container topmost-section-divider">
-							<img class="divider-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/whistle.svg" alt=""></img>
-							<div class="divider-text">HALF-TIME</div>
-							<div class="timeline-item-separator"></div>
-						</div>
-						<div>
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">15</span>
+											<img class="lrvl-pcc" alt="Yellow card" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg"></img>
+										</div>
+										<div>
+										<span class="lrvl-pnc">J. Ramalho</span>
+										</div>
+									</span>
 
-						<!--  Kick Off -->
-						<div class="divider-text-container topmost-section-divider">
-							<img class="divider-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/whistle.svg" alt=""></img>
-							<div class="divider-text">KICKOFF</div>
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">14</span>
+										</div>
+										<div>
+										<span class="lrvl-pnc">J. Ramalho</span>
+										</div>
+									</span>
+
+								</div>
+
+								<div class="lrvl-fr" style="height:20%">
+									<span class="lrvl-pd" style="width:100%">
+										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">20</span>
+											<img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
+										</div>
+										<div>
+										<span class="lrvl-pnc">G. Iraizoz</span>
+										</div>
+									</span>
+								</div>
+
+								<div class="lrvl-fr" style="height:20%">
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">4</span>
+											<img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
+										</div>
+										<div>
+										<span class="lrvl-pnc">J. Ramalho</span>
+										</div>
+									</span>
+
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">5</span>
+										</div>
+										<div>
+										<span class="lrvl-pnc">J. Ramalho</span>
+										</div>
+									</span>
+
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">15</span>
+											<img class="lrvl-pcc" alt="Yellow card" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg"></img>
+										</div>
+										<div>
+										<span class="lrvl-pnc">J. Ramalho</span>
+										</div>
+									</span>
+
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">14</span>
+										</div>
+										<div>
+										<span class="lrvl-pnc">J. Ramalho</span>
+										</div>
+									</span>
+
+								</div>
+
+								<div class="lrvl-fr" style="height:20%">
+									<span class="lrvl-pd" style="width:100%">
+										<div class="lrvl-pc imso-loa" aria-label="Striker" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">7</span>
+											<img class="lrvl-ors-g" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
+										</div>
+										<div>
+										<span class="lrvl-pnc">C. Stuani</span>
+										</div>
+									</span>
+								</div>
+
+							</div>
+
+
+
+							<div class="lrvl-fl lrvl-bgc"></div>
+							<div class="lrvl-fl lrvl-bgl lrvl-gll"></div>
+							<div class="lrvl-fl lrvl-bgs lrvl-gls"></div>
+
+							<div class="lrvl-ls">
+								<div class="lrvl-fr" style="height:20%">
+									<span class="lrvl-pd" style="width:100%">
+										<div class="lrvl-pc imso-loa" aria-label="Striker" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">9</span>
+											<img class="lrvl-ors-g" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
+										</div>
+										<div>
+										<span class="lrvl-pnc">I. Williams</span>
+										</div>
+									</span>
+								</div>
+
+
+								<div class="lrvl-fr" style="height:20%">
+									<span class="lrvl-pd" style="width:33.33%">
+										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">20</span>
+
+										</div>
+										<div>
+										<span class="lrvl-pnc">G. Iraizoz</span>
+										</div>
+									</span>
+									<span class="lrvl-pd" style="width:33.33%">
+										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">20</span>
+
+										</div>
+										<div>
+										<span class="lrvl-pnc">G. Iraizoz</span>
+										</div>
+									</span>
+									<span class="lrvl-pd" style="width:33.33%">
+										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">20</span>
+
+										</div>
+										<div>
+										<span class="lrvl-pnc">G. Iraizoz</span>
+										</div>
+									</span>
+								</div>
+
+
+								<div class="lrvl-fr" style="height:20%">
+									<span class="lrvl-pd" style="width:50%">
+										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">20</span>
+
+										</div>
+										<div>
+										<span class="lrvl-pnc">G. Iraizoz</span>
+										</div>
+									</span>
+
+									<span class="lrvl-pd" style="width:50%">
+										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">20</span>
+
+										</div>
+										<div>
+										<span class="lrvl-pnc">G. Iraizoz</span>
+										</div>
+									</span>
+
+								</div>
+
+								<div class="lrvl-fr" style="height:20%">
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">12</span>
+											<img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
+										</div>
+										<div>
+										<span class="lrvl-pnc">J. Ramalho</span>
+										</div>
+									</span>
+
+									<span class="lrvl-pd" style="width:25%"}}>
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">4</span>
+										</div>
+										<div>
+										<span class="lrvl-pnc">J. Ramalho</span>
+										</div>
+									</span>
+
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">3</span>
+											<img class="lrvl-pcc" alt="Yellow card" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg"></img>
+										</div>
+										<div>
+										<span class="lrvl-pnc">J. Ramalho</span>
+										</div>
+									</span>
+
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">21</span>
+										</div>
+										<div>
+										<span class="lrvl-pnc">J. Ramalho</span>
+										</div>
+									</span>
+
+								</div>
+
+								<div class="lrvl-fr" style="height:20%">
+									<span class="lrvl-pd" style="width:100%">
+										<div class="lrvl-pc imso-loa" aria-label="Striker" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">13</span>
+											<img class="lrvl-ors-g" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
+										</div>
+										<div>
+										<span class="lrvl-pnc">G. I. Herrerín</span>
+										</div>
+									</span>
+								</div>
+
+							</div>
+
+							<div class="ground-team">
+								<img  src="//ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_96x96.png" alt=""></img>
+								<span class="ground-team-home">Girona</span>
+								<span class="ground-team-format">4-2-3-1</span>
+							</div>
+
 						</div>
+
+
+						<div style="padding-left:40px;margin-top:20px">
+							<span>
+								<img
+								src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png"
+								alt=""
+								style="width:24px; height:24px">
+								</img>
+								<span style="padding-left:140px;padding-right:130; font-weight:bold">SUBSTITUES</span>
+								<img
+								src="https://ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_48x48.png"
+								alt=""
+								style="width:24px; height:24px">
+								</img>
+							</span>
+						</div>
+
+					<table style="margin-left:35px;margin-top:20px" class="table table-borderless">
+					<tbody>
+					<tr>
+						<td>
+							<span style="margin-right:10px">2</span>
+							Juanfran
+							<span></span>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							<span></span>
+							Gorka Iraizoz
+							<span style="margin-left:10px">1</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span style="margin-right:10px">9</span>
+							Guido Carrillo
+							<span></span>
+							<img alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-in.svg"></img>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							<span></span>
+							Bernardo Espinosa
+							<span style="margin-left:10px">2</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span style="margin-right:10px">10</span>
+							Nabil El Zhar
+							<span></span>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							<span></span>
+							Jonás Ramalho
+							<span style="margin-left:10px">4</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span style="margin-right:10px">16</span>
+							José Arnaiz
+							<span></span>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							<span></span>
+							Anthony Lozano
+							<span style="margin-left:10px">19</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span style="margin-right:10px">20</span>
+							<span>Michael Santos</span>
+							<span></span>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							<span></span>
+							Carles Planas
+							<span style="margin-left:10px">21</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span style="margin-right:10px">23</span>
+							Mikel Vesga
+							<span></span>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							<span></span>
+							Seydou Doumbia
+							<span style="margin-left:10px">22</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span style="margin-right:10px">29</span>
+							Andriy Lunin
+							<span></span>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							<span></span>
+							Aleix García
+							<span style="margin-left:10px">23</span>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+
+
+						<div style="padding-left:40px; margin-top:20px">
+						<span>
+							<img
+							src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png"
+							alt=""
+							style="width:24px; height:24px">
+							</img>
+							<span style="padding-left:140px; padding-right:130px;font-weight:bold">MANAGER</span>
+							<img
+							src="https://ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_48x48.png"
+							alt=""
+							style="width:24px; height:24px">
+							</img>
+						</span>
+						</div>
+						<table style="margin-left:35px;margin-top:20px" class="table table-borderless">
+							<tbody>
+								<tr><td>M. Pellegrino</td><td></td><td>Eusebio</td></tr>
+							</tbody>
+						</table>
 					</div>
 
-				</div>
 
-				<!-- End Testing Timeline -->
+			<!-- End Testing  -->
 				<div class="col-md-3">
 				</div>
 
@@ -602,468 +547,525 @@
 
 					<div class="tab-content" style="font-size:12px">
 
+						<!-- Timeline  -->
+						<div id="timeline" class="tab-pane fade">
+							<!-- Full Time -->
+							<div>
+								<div class="divider-text-container topmost-section-divider">
+									<img class="divider-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/whistle.svg" alt=""></img>
+									<div class="divider-text">FULL-TIME</div>
+									<div class="timeline-item-separator"></div>
+								</div>
+								<div>
+									{% if events %}
+										{% for event in events %}
+											{% if event.type == 'goal' %}
+												{% if event.home_scorer != "" %}
+														<!-- Home Goal -->
+													 <div>
+														 <div class="first-team">
+															 <table class="soccer-event shot-or-goal-event">
+																 <tbody>
+																	 <tr>
+																		 <td class="place-holder-left"></td>
+																		 <td class="left-border" rowspan="4"></td>
+																		 <td class="top-border-left"></td>
+																		 <td class="top-border-right"></td>
+																		 <td class="right-border" rowspan="4"></td>
+																		 <td class="place-holder-right"></td>
+																	 </tr>
+																	 <tr class="player-name-row">
+																		 <td class="left-cell sports-event-player-name-cell imso-loa">
+																			 <div class="sports-event-player-name-div imso-hide-overflow">
+																				 <span class="inline-game-time">
+																					 <span class="liveresults-sports-immersive__game-minute">
+																						 <span>{{event.time}}</span>
+
+																					 </span>
+																				 </span>
+																				 <span class="sports-event-player-name ellipsisize">{{event.home_scorer}}</span>
+																			 </div>
+																		 </td>
+																		 <td class="middle-cell" rowspan="2">
+																			 <img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
+																		 </td>
+																		 <td class="right-cell sports-event-player-name-cell imso-loa">
+																			 <div class="sports-event-player-name-div imso-hide-overflow">
+																				 <span class="inline-game-time">
+																					 <span class="liveresults-sports-immersive__game-minute">
+																						 <span>{{event.time}}</span>
+
+																					 </span>
+																				 </span>
+																				 <span class="sports-event-player-name ellipsisize">Rubén Rochina</span>
+																			 </div>
+																		 </td>
+																	 </tr>
+																	 <tr>
+																		 <td class="left-cell">
+																			 <div class="additional-info">
+																				 <div class="imso-hide-overflow imso-loa">
+																					 <span class="score">
+																						 <span>
+																							 <span>{{event.score}}</span>
+																						 </span>
+																					</span>
+
+																				 </div>
+																			 </div>
+																		 </td>
+																		 <td class="right-cell">
+																			 <div class="additional-info">
+																				 <div class="imso-hide-overflow imso-loa">
+																					 <span class="score">
+																						 <span>
+																							 <span></span>
+																						 </span>
+																					 </span>
+
+																				 </div>
+																			 </div>
+																		 </td>
+																	 </tr>
+																	 <tr>
+																		 <td class="place-holder-left"></td>
+																		 <td class="bottom-border-left"></td>
+																		 <td class="bottom-border-right"></td>
+																		 <td class="place-holder-right"></td>
+																	 </tr>
+																 </tbody>
+															 </table>
+														 </div>
+														 <div class="timeline-item-separator"></div>
+													 </div>
+													{% else %}
+													<!-- Away Goal -->
+													<div>
+													 <div class="second-team">
+														 <table class="soccer-event shot-or-goal-event">
+															 <tbody>
+																 <tr>
+																	 <td class="place-holder-left"></td>
+																	 <td class="left-border" rowspan="4"></td>
+																	 <td class="top-border-left"></td>
+																	 <td class="top-border-right"></td>
+																	 <td class="right-border" rowspan="4"></td>
+																	 <td class="place-holder-right"></td>
+																 </tr>
+																 <tr class="player-name-row">
+																	 <td class="left-cell sports-event-player-name-cell imso-loa">
+																		 <div class="sports-event-player-name-div imso-hide-overflow">
+																			 <span class="inline-game-time">
+																				 <span class="liveresults-sports-immersive__game-minute">
+																					 <span></span>
+																					 <span></span>
+																				 </span>
+																			 </span>
+																			 <span class="sports-event-player-name ellipsisize"></span>
+																		 </div>
+																	 </td>
+																	 <td class="middle-cell" rowspan="2">
+																		 <img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
+																	 </td>
+																	 <td class="right-cell sports-event-player-name-cell imso-loa">
+																		 <div class="sports-event-player-name-div imso-hide-overflow">
+																			 <span class="inline-game-time">
+																				 <span class="liveresults-sports-immersive__game-minute">
+																					 {{event.time}}
+																				 </span>
+																			 </span>
+																			 <span class="sports-event-player-name ellipsisize">{{event.away_scorer}}</span>
+																		 </div>
+																	 </td>
+																 </tr>
+																 <tr>
+																	 <td className="left-cell">
+																		 <div className="additional-info">
+																			 <div className="imso-hide-overflow imso-loa">
+																				 <span className="score">
+																					 <span>
+																						 <span></span>
+																					 </span>
+																				 </span>
+																				 <span> </span>
+
+																			 </div>
+																		 </div>
+																	 </td>
+																	 <td class="right-cell">
+																		 <div class="additional-info">
+																			 <div class="imso-hide-overflow imso-loa">
+																				 <span class="score">
+																					 <span>
+																						 {{event.score}}
+																					 </span>
+																				 </span>
+
+																			 </div>
+																		 </div>
+																	 </td>
+																 </tr>
+																 <tr>
+																	 <td class="place-holder-left"></td>
+																	 <td class="bottom-border-left"></td>
+																	 <td class="bottom-border-right"></td>
+																	 <td class="place-holder-right"></td>
+																 </tr>
+															 </tbody>
+														 </table>
+													 </div>
+													 <div class="timeline-item-separator"></div>
+												 </div>
+
+
+													{% endif %}
+
+											{% elif event.type == 'card' %}
+
+												{% if event.home_fault != "" %}
+												<!-- Home Card -->
+												<div>
+													<div class="first-team">
+														<table class="soccer-event other-event">
+															<tbody>
+																<tr>
+																	<td class="place-holder-left"></td>
+																	<td class="left-border" rowspan="3"></td>
+																	<td class="top-border-left"></td>
+																	<td class="top-border-right"></td>
+																	<td class="right-border" rowspan="3"></td>
+																	<td class="place-holder-right"></td>
+																</tr>
+																<tr class="player-name-row tall-row">
+																	<td class="left-cell sports-event-player-name-cell imso-loa">
+																		<div class="sports-event-player-name-div imso-hide-overflow">
+																			<span class="inline-game-time">
+																				<span class="liveresults-sports-immersive__game-minute">
+																					<span>{{event.time}}</span>
+																				</span>
+																			</span>
+																			<span class="sports-event-player-name ellipsisize">{{event.home_fault}}</span>
+																		</div>
+																	</td>
+																	<td class="middle-cell" rowspan="1">
+																		{% if event.card == "yellowcard" %}
+																			<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-left.svg" alt=""/>
+																		{% else %}
+																			<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/red-card-left.svg" alt="">
+																		{% endif %}
+																	</td>
+																	<td class="right-cell sports-event-player-name-cell imso-loa">
+																		<div class="sports-event-player-name-div imso-hide-overflow">
+																			<span class="inline-game-time">
+																				<span class="liveresults-sports-immersive__game-minute">
+																					<span>83</span>
+																					<span>'</span>
+																				</span>
+																			</span>
+																			<span class="sports-event-player-name ellipsisize">Nikola Vukčević</span>
+																		</div>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="place-holder-left"></td>
+																	<td class="bottom-border-left"></td>
+																	<td class="bottom-border-right"></td>
+																	<td class="place-holder-right"></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="timeline-item-separator"></div>
+												</div>
+												{% else %}
+												<!-- Away Card -->
+												<div>
+													<div class="second-team">
+														<table class="soccer-event other-event">
+															<tbody>
+																<tr>
+																	<td class="place-holder-left"></td>
+																	<td class="left-border" rowspan="3"></td>
+																	<td class="top-border-left"></td>
+																	<td class="top-border-right"></td>
+																	<td class="right-border" rowspan="3"></td>
+																	<td class="place-holder-right"></td>
+																</tr>
+																<tr class="player-name-row tall-row">
+																	<td class="left-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go">
+																		<div class="sports-event-player-name-div imso-hide-overflow">
+																			<span class="inline-game-time">
+																				<span class="liveresults-sports-immersive__game-minute">
+																					<span>{{event.time}}</span>
+																				</span>
+																			</span>
+																		</div>
+																	</td>
+																	<td class="middle-cell" rowspan="1">
+																		<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg" alt=""></img>
+																	</td>
+																	<td class="right-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go">
+																		<div class="sports-event-player-name-div imso-hide-overflow">
+																			<span class="inline-game-time">
+																				<span class="liveresults-sports-immersive__game-minute">
+																					<span>{{event.time}}</span>
+																				</span>
+																			</span>
+																			<span class="sports-event-player-name ellipsisize">{{event.away_fault}}</span>
+																		</div>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="place-holder-left"></td>
+																	<td class="bottom-border-left"></td>
+																	<td class="bottom-border-right"></td>
+																	<td class="place-holder-right"></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="timeline-item-separator"></div>
+
+												</div>
+
+												{% endif %}
+
+											{% elif event.type == 'substitution' %}
+												{% if event.team_name == match_info.match_hometeam_name %}
+												<!-- Home Substitution -->
+												<div class="first-team">
+													<table class="soccer-event substitution-event">
+														<tbody>
+															<tr>
+																<td class="place-holder-left"></td>
+																<td class="left-border" rowspan="6"></td>
+																<td class="top-border-left"></td>
+																<td class="top-border-right"></td>
+																<td class="right-border" rowspan="6"></td>
+																<td class="place-holder-right"></td>
+															</tr>
+															<tr class="replacing-player-row tall-row">
+																<td class="left-cell sports-event-player-name-cell imso-loa">
+																	<div class="sports-event-player-name-div imso-hide-overflow">
+																		<span class="sports-event-player-name ellipsisize">{{event.lineup_player_in}}</span>
+																	</div>
+																</td>
+																<td class="middle-cell" rowspan="1">
+																	<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-in.svg" alt=""></img>
+																</td>
+																<td class="right-cell sports-event-player-name-cell imso-loa" data-url="/search?site=async/lr_sma_tb&amp;q=Patrick+Roberts&amp;stick=H4sIAAAAAAAAAONgVuLWz9U3MDQwyDNNz33E6M4t8PLHPWEpu0lrTl5jtODiCs7IL3fNK8ksqRTS4mKDshS4-KWQ9WkwSPFyIQvwLGLlD0gsKcpMzlYIyk9KLSopBgCJC0N8awAAAA" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAC">
+																	<div class="sports-event-player-name-div imso-hide-overflow">
+																		<span class="sports-event-player-name ellipsisize"></span>
+																	</div>
+																</td>
+															</tr>
+															<tr class="separator-row">
+																<td class="left-cell">
+																	<div class="separator-line"></div>
+																</td>
+																<td class="middle-cell">
+																	<span>
+																		<span class="liveresults-sports-immersive__game-minute">
+																			<span>{{event.time}}</span>
+																		</span>
+																	</span>
+																</td>
+																<td class="right-cell">
+																	<div class="separator-line"></div>
+																</td>
+															</tr>
+															<tr class="replaced-player-row">
+																<td class="left-cell sports-event-player-name-cell imso-loa" data-url="/search?site=async/lr_sma_tb&amp;q=Borja+Garc%C3%ADa&amp;stick=H4sIAAAAAAAAAONgVuLSz9U3SClOTjesesToyi3w8sc9YSmbSWtOXmM04-IKzsgvd80rySypFNLgYoOy5Lj4pJC0aTBI8XAh8XkWsfI65RdlJSq4JxYlH16bCAB7A-JwZgAAAA" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAD">
+																	<div class="sports-event-player-name-div imso-hide-overflow">
+																		<span class="sports-event-player-name ellipsisize">{{event.lineup_player_out}}</span>
+																	</div>
+																</td>
+																<td class="middle-cell" rowspan="2">
+																	<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg" alt=""></img>
+																</td>
+																<td class="right-cell sports-event-player-name-cell imso-loa" data-url="/search?site=async/lr_sma_tb&amp;q=Borja+Garc%C3%ADa&amp;stick=H4sIAAAAAAAAAONgVuLSz9U3SClOTjesesToyi3w8sc9YSmbSWtOXmM04-IKzsgvd80rySypFNLgYoOy5Lj4pJC0aTBI8XAh8XkWsfI65RdlJSq4JxYlH16bCAB7A-JwZgAAAA" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAE">
+																	<div class="sports-event-player-name-div imso-hide-overflow">
+																		<span class="sports-event-player-name ellipsisize">Borja García</span>
+																	</div>
+																</td>
+															</tr>
+															<tr class="replaced-player-position-row">
+																<td class="left-cell">
+																	<div class="additional-info">
+																		<div class="imso-hide-overflow imso-loa" role="link" tabindex="0" jsaction="jsa.go" >Midfielder</div>
+																	</div>
+																</td>
+																<td class="right-cell">
+																	<div class="additional-info">
+																		<div class="imso-hide-overflow imso-loa" role="link" tabindex="0" jsaction="jsa.go">Midfielder</div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td class="place-holder-left"></td>
+																<td class="bottom-border-left"></td>
+																<td class="bottom-border-right"></td>
+																<td class="place-holder-right"></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="timeline-item-separator">
+												</div>
+											</div>
+
+
+												{% else %}
+												<!-- Away Substitutes -->
+
+												<div>
+													<div class="second-team">
+														<table class="soccer-event substitution-event">
+															<tbody>
+																<tr>
+																	<td class="place-holder-left"></td>
+																	<td class="left-border" rowspan="6"></td>
+																	<td class="top-border-left"></td>
+																	<td class="top-border-right"></td>
+																	<td class="right-border" rowspan="6"></td>
+																	<td class="place-holder-right"></td>
+																</tr>
+																<tr class="replacing-player-row tall-row">
+																	<td class="left-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go">
+																		<div class="sports-event-player-name-div imso-hide-overflow">
+																			<span class="sports-event-player-name ellipsisize">{{event.lineup_player_in}}</span>
+																		</div>
+																	</td>
+																	<td class="middle-cell" rowspan="1">
+																		<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-in.svg" alt=""></img>
+																	</td>
+																	<td class="right-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go">
+																		<div class="sports-event-player-name-div imso-hide-overflow">
+																			<span class="sports-event-player-name ellipsisize">{{event.lineup_player_out}}</span>
+																		</div>
+																	</td>
+																</tr>
+																<tr class="separator-row">
+																	<td class="left-cell">
+																		<div class="separator-line"></div>
+																	</td>
+																	<td class="middle-cell">
+																		<span>
+																			<span class="liveresults-sports-immersive__game-minute">
+																				<span>{{event.time}}</span>
+																			</span>
+																		</span>
+																	</td>
+																	<td class="right-cell">
+																		<div class="separator-line"></div>
+																	</td>
+																</tr>
+																<tr class="replaced-player-row">
+																	<td class="left-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAJ">
+																		<div class="sports-event-player-name-div imso-hide-overflow">
+																			<span class="sports-event-player-name ellipsisize">{{event.lineup_player_in}}</span>
+																		</div>
+																	</td>
+																	<td class="middle-cell" rowspan="2">
+																		<img class="event-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg" alt=""></img>
+																	</td>
+																	<td class="right-cell sports-event-player-name-cell imso-loa" role="link" tabindex="0" jsaction="jsa.go" >
+																		<div class="sports-event-player-name-div imso-hide-overflow">
+																			<span class="sports-event-player-name ellipsisize">{{event.lineup_player_out}}</span>
+																		</div>
+																	</td>
+																</tr>
+																<tr class="replaced-player-position-row">
+																	<td class="left-cell">
+																		<div class="additional-info">
+																			<div class="imso-hide-overflow imso-loa" role="link" tabindex="0" jsaction="jsa.go" data-ved="2ahUKEwi4_5eE96jhAhXg63MBHS8ABu4Q7oABegQIARAL">Midfielder</div>
+																		</div>
+																	</td>
+																	<td class="right-cell">
+																		<div class="additional-info">
+																			<div class="imso-hide-overflow imso-loa" role="link" tabindex="0" jsaction="jsa.go">Midfielder</div>
+																		</div>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="place-holder-left"></td>
+																	<td class="bottom-border-left"></td>
+																	<td class="bottom-border-right"></td>
+																	<td class="place-holder-right"></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<div class="timeline-item-separator">
+													</div>
+												</div>
+												{% endif %}
+
+
+											{% elif event.time == "45'"%}
+											<!--  Half Time-->
+											<div class="divider-text-container topmost-section-divider">
+												<img class="divider-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/whistle.svg" alt=""></img>
+												<div class="divider-text">HALF-TIME</div>
+												<div class="timeline-item-separator"></div>
+											</div>
+											<div>
+											{% else %}
+											<p>No event found!!!</p>
+											{% endif %}
+										{% endfor %}
+									{% endif %}
+
+
+
+								<!--  Kick Off -->
+								<div class="divider-text-container topmost-section-divider">
+									<img class="divider-icon" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/whistle.svg" alt=""></img>
+									<div class="divider-text">KICKOFF</div>
+								</div>
+							</div>
+
+						</div>
+
 						<!-- Lineup -->
-						<div id="lineups" class="tab-pane fade">
-			        <div class="lineup-ground-container">
-			          <div class="ground-team">
-			            <img  src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png" alt=""></img>
-			            <span class="ground-team-home">Leganes</span>
-			            <span class="ground-team-format">4-1-4-1</span>
-			          </div>
-
-			          <div class="lrvl-fl lrvl-tgc"></div>
-			          <div class="lrvl-fl lrvl-tg lrvl-gll"></div>
-			          <div class="lrvl-fl lrvl-tg lrvl-gls"></div>
-			          <div class="lrvl-fl lrvl-mfc lrvl-vac"></div>
-			          <div class="lrvl-mfl lrvl-vac"></div>
-			          <div class="lrvl-ls">
-			            <div class="lrvl-fr" style="height:20%">
-			              <span class="lrvl-pd" style="width:100%">
-			                <div class="lrvl-pc imso-loa" aria-label="Goalkeeper" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">1</span>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">G. Iraizoz</span>
-			                </div>
-			              </span>
-			            </div>
-			            <div class="lrvl-fr" style="height:"20%">
-			              <span class="lrvl-pd" style="width:"25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">4</span>
-			                  <img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			              <span class="lrvl-pd" style="width:25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">5</span>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			              <span class="lrvl-pd" style="width:25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">15</span>
-			                  <img class="lrvl-pcc" alt="Yellow card" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg"></img>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			              <span class="lrvl-pd" style="width:25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">14</span>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			            </div>
-
-			            <div class="lrvl-fr" style="height:20%">
-			              <span class="lrvl-pd" style="width:100%">
-			                <div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">20</span>
-			                  <img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">G. Iraizoz</span>
-			                </div>
-			              </span>
-			            </div>
-
-			            <div class="lrvl-fr" style="height:20%">
-			              <span class="lrvl-pd" style="width:25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">4</span>
-			                  <img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			              <span class="lrvl-pd" style="width:25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">5</span>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			              <span class="lrvl-pd" style="width:25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">15</span>
-			                  <img class="lrvl-pcc" alt="Yellow card" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg"></img>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			              <span class="lrvl-pd" style="width:25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">14</span>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			            </div>
-
-			            <div class="lrvl-fr" style="height:20%">
-			              <span class="lrvl-pd" style="width:100%">
-			                <div class="lrvl-pc imso-loa" aria-label="Striker" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">7</span>
-			                  <img class="lrvl-ors-g" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">C. Stuani</span>
-			                </div>
-			              </span>
-			            </div>
-
-			          </div>
 
 
-
-			          <div class="lrvl-fl lrvl-bgc"></div>
-			          <div class="lrvl-fl lrvl-bgl lrvl-gll"></div>
-			          <div class="lrvl-fl lrvl-bgs lrvl-gls"></div>
-
-			          <div class="lrvl-ls">
-			            <div class="lrvl-fr" style="height:20%">
-			              <span class="lrvl-pd" style="width:100%">
-			                <div class="lrvl-pc imso-loa" aria-label="Striker" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">9</span>
-			                  <img class="lrvl-ors-g" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">I. Williams</span>
-			                </div>
-			              </span>
-			            </div>
-
-
-			            <div class="lrvl-fr" style="height:20%">
-			              <span class="lrvl-pd" style="width:33.33%">
-			                <div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">20</span>
-
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">G. Iraizoz</span>
-			                </div>
-			              </span>
-			              <span class="lrvl-pd" style="width:33.33%">
-			                <div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">20</span>
-
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">G. Iraizoz</span>
-			                </div>
-			              </span>
-			              <span class="lrvl-pd" style="width:33.33%">
-			                <div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">20</span>
-
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">G. Iraizoz</span>
-			                </div>
-			              </span>
-			            </div>
-
-
-			            <div class="lrvl-fr" style="height:20%">
-			              <span class="lrvl-pd" style="width:50%">
-			                <div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">20</span>
-
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">G. Iraizoz</span>
-			                </div>
-			              </span>
-
-			              <span class="lrvl-pd" style="width:50%">
-			                <div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">20</span>
-
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">G. Iraizoz</span>
-			                </div>
-			              </span>
-
-			            </div>
-
-			            <div class="lrvl-fr" style="height:20%">
-			              <span class="lrvl-pd" style="width:25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">12</span>
-			                  <img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			              <span class="lrvl-pd" style="width:25%"}}>
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">4</span>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			              <span class="lrvl-pd" style="width:25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">3</span>
-			                  <img class="lrvl-pcc" alt="Yellow card" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg"></img>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			              <span class="lrvl-pd" style="width:25%">
-			                <div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">21</span>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">J. Ramalho</span>
-			                </div>
-			              </span>
-
-			            </div>
-
-			            <div class="lrvl-fr" style="height:20%">
-			              <span class="lrvl-pd" style="width:100%">
-			                <div class="lrvl-pc imso-loa" aria-label="Striker" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-			                  <span class="lrvl-jnc">13</span>
-			                  <img class="lrvl-ors-g" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
-			                </div>
-			                <div>
-			                <span class="lrvl-pnc">G. I. Herrerín</span>
-			                </div>
-			              </span>
-			            </div>
-
-			          </div>
-
-			          <div class="ground-team">
-			            <img  src="//ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_96x96.png" alt=""></img>
-			            <span class="ground-team-home">Girona</span>
-			            <span class="ground-team-format">4-2-3-1</span>
-			          </div>
-
-			        </div>
-
-
-			        <div style="padding-left:40px;margin-top:20px">
-			          <span>
-			            <img
-			            src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png"
-			            alt=""
-			            style="width:24px; height:24px">
-			            </img>
-			            <span style="padding-left:140px;padding-right:130; font-weight:bold">SUBSTITUES</span>
-			            <img
-			            src="https://ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_48x48.png"
-			            alt=""
-			            style="width:24px; height:24px">
-			            </img>
-			          </span>
-			        </div>
-
-			      <table style="margin-left:35px;margin-top:20px" class="table table-borderless">
-			      <tbody>
-			      <tr>
-			        <td>
-			          <span style="margin-right:10px">2</span>
-			          Juanfran
-			          <span></span>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			          <span></span>
-			          Gorka Iraizoz
-			          <span style="margin-left:10px">1</span>
-			        </td>
-			      </tr>
-			      <tr>
-			        <td>
-			          <span style="margin-right:10px">9</span>
-			          Guido Carrillo
-			          <span></span>
-			          <img alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-in.svg"></img>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			          <span></span>
-			          Bernardo Espinosa
-			          <span style="margin-left:10px">2</span>
-			        </td>
-			      </tr>
-			      <tr>
-			        <td>
-			          <span style="margin-right:10px">10</span>
-			          Nabil El Zhar
-			          <span></span>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			          <span></span>
-			          Jonás Ramalho
-			          <span style="margin-left:10px">4</span>
-			        </td>
-			      </tr>
-			      <tr>
-			        <td>
-			          <span style="margin-right:10px">16</span>
-			          José Arnaiz
-			          <span></span>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			          <span></span>
-			          Anthony Lozano
-			          <span style="margin-left:10px">19</span>
-			        </td>
-			      </tr>
-			      <tr>
-			        <td>
-			          <span style="margin-right:10px">20</span>
-			          <span>Michael Santos</span>
-			          <span></span>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			          <span></span>
-			          Carles Planas
-			          <span style="margin-left:10px">21</span>
-			        </td>
-			      </tr>
-			      <tr>
-			        <td>
-			          <span style="margin-right:10px">23</span>
-			          Mikel Vesga
-			          <span></span>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			          <span></span>
-			          Seydou Doumbia
-			          <span style="margin-left:10px">22</span>
-			        </td>
-			      </tr>
-			      <tr>
-			        <td>
-			          <span style="margin-right:10px">29</span>
-			          Andriy Lunin
-			          <span></span>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			        </td>
-			        <td>
-			          <span></span>
-			          Aleix García
-			          <span style="margin-left:10px">23</span>
-			        </td>
-			      </tr>
-			      </tbody>
-			    </table>
-
-
-			        <div style="padding-left:40px; margin-top:20px">
-			        <span>
-			          <img
-			          src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png"
-			          alt=""
-			          style="width:24px; height:24px">
-			          </img>
-			          <span style="padding-left:140px; padding-right:130px;font-weight:bold">MANAGER</span>
-			          <img
-			          src="https://ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_48x48.png"
-			          alt=""
-			          style="width:24px; height:24px">
-			          </img>
-			        </span>
-			        </div>
-			        <table style="margin-left:35px;margin-top:20px" class="table table-borderless">
-			          <tbody>
-			            <tr><td>M. Pellegrino</td><td></td><td>Eusebio</td></tr>
-			          </tbody>
-			        </table>
-			      </div>
+						<!-- Statistics -->
 						<div id="stats" class="tab-pane fade">
-			        <table style="margin-left:35px; margin-top:20px;" class="table table-borderless">
-			          <thead>
-			            <tr>
-			              <th scope="col">
-			              <img
-			              src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png"
-			              alt=""
-			              style="width:24px;height:24px;">
-			              </th>
-			              <th scope="col">TEAM STATS</th>
-			              <th scope="col">
-			              <img
-			              src="https://ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_48x48.png"
-			              alt=""
-			              style="width:24px;height:24px;">
-			              </img>
-			              </th>
-			            </tr>
-			          </thead>
-			          <tbody>
+							<table style="margin-left:35px;" class="table table-borderless">
+								<thead>
+									<tr>
+										<th scope="col">
+										<img
+										src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png"
+										alt=""
+										style="width:24px;height:24px;">
+										</th>
+										<th scope="col">TEAM STATS</th>
+										<th scope="col">
+										<img
+										src="https://ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_48x48.png"
+										alt=""
+										style="width:24px;height:24px;">
+										</img>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
 									{% if statistics %}
 										{% for stats in statistics %}
 											<tr>
 												<td>{{stats.home}}</td>
 												<td>{{stats.type}}</td>
-												<td>8</td>{{stats.away}}
+												<td>{{stats.away}}</td>
 										</tr>
 										{% endfor %}
 									{% endif %}
-			          </tbody>
-			        </table>
-			      </div>
-
-						<div id="news" class="tab-pane fade"></div>
+								</tbody>
+							</table>
+						</div>
+						<!-- News will be available in future version -->
+					<div id="news" class="tab-pane fade"></div>
 					</div>
 				</div>
 
