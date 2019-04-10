@@ -66,7 +66,7 @@
 						<hr style="width:90%"></hr>
 
 					<div>
-						<div style="font-size:12;color:#787878;float:left">
+						<div style="font-size:12px;color:#787878;float:left">
 							<ul style="list-style-type:none; display:inline">
 								{% for scorer in goalscorer %}
 									{% if scorer.home_scorer != ""  %}
@@ -118,252 +118,132 @@
 							<div class="lrvl-fl lrvl-mfc lrvl-vac"></div>
 							<div class="lrvl-mfl lrvl-vac"></div>
 							<div class="lrvl-ls">
-								<div class="lrvl-fr" style="height:20%">
-									<span class="lrvl-pd" style="width:100%">
-										<div class="lrvl-pc imso-loa" aria-label="Goalkeeper" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">1</span>
-										</div>
-										<div>
-										<span class="lrvl-pnc">G. Iraizoz</span>
-										</div>
-									</span>
-								</div>
-								<div class="lrvl-fr" style="height:"20%">
-									<span class="lrvl-pd" style="width:"25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">4</span>
+
+								<div class="lrvl-fr" style="height:30%">
+
+									{% for linepus in lineup_home_starting %}
+
+									{% if linepus.lineup_player in player_outs %}
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#005FAB" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">{{linepus.lineup_number}}</span>
 											<img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
 										</div>
 										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
+										<span class="lrvl-pnc">{{linepus.lineup_player}}</span>
 										</div>
 									</span>
 
-									<span class="lrvl-pd" style="width:25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">5</span>
+									{% else %}
+										{% if forloop.counter == 1 %}
+											<span class="lrvl-pd" style="width:100%">
+										{% elif forloop.counter <= home_row_counter.two %}
+											<span class="lrvl-pd" style="width:32.5%">
+										{% elif forloop.counter <= home_row_counter.three %}
+											<span class="lrvl-pd" style="width:23%">
+										{% elif forloop.counter <= home_row_counter.four %}
+											<span class="lrvl-pd" style="width:32.5%">
+										{% else %}
+										<span class="lrvl-pd" style="width:23%">
+										{% endif %}
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#005FAB" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">{{linepus.lineup_number}}</span>
 										</div>
 										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
+										<span class="lrvl-pnc">{{linepus.lineup_player}}</span>
 										</div>
 									</span>
 
-									<span class="lrvl-pd" style="width:25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">15</span>
-											<img class="lrvl-pcc" alt="Yellow card" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg"></img>
-										</div>
-										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
-										</div>
-									</span>
+									{% endif %}
 
-									<span class="lrvl-pd" style="width:25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">14</span>
-										</div>
-										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
-										</div>
-									</span>
+
+
+									{% if linepus.lineup_position == '1' %}
+								</div>
+								<div class="lrvl-fr" style="height:30%">
+									{% elif linepus.lineup_position == match_home_row.one %}
 
 								</div>
+								<div class="lrvl-fr" style="height:25%">
+									{% elif linepus.lineup_position == match_home_row.two %}
+								</div>
+								<div class="lrvl-fr" style="height:25%">
 
-								<div class="lrvl-fr" style="height:20%">
-									<span class="lrvl-pd" style="width:100%">
-										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">20</span>
+									{% endif %}
+
+									{% endfor %}
+
+								</div>
+							</div>
+
+								<div class="lrvl-fl lrvl-bgc"></div>
+								<div class="lrvl-fl lrvl-bgl lrvl-gll"></div>
+								<div class="lrvl-fl lrvl-bgs lrvl-gls"></div>
+								<div class="lrvl-ls">
+
+								<div class="lrvl-fr" style="height:30%">
+
+									{% for linepus in lineup_away_starting %}
+
+									{% if linepus.lineup_player in player_outs %}
+									<span class="lrvl-pd" style="width:25%">
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#a40047" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">{{linepus.lineup_number}}</span>
 											<img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
 										</div>
 										<div>
-										<span class="lrvl-pnc">G. Iraizoz</span>
+										<span class="lrvl-pnc">{{linepus.lineup_player}}</span>
 										</div>
 									</span>
+
+									{% else %}
+									{% if forloop.counter <= 3 %}
+										<span class="lrvl-pd" style="width:32.5%">
+									{% elif forloop.counter <= 6 %}
+										<span class="lrvl-pd" style="width:32.5%">
+									{% elif forloop.counter <= 10 %}
+										<span class="lrvl-pd" style="width:23%">
+									{% elif forloop.counter <= 11 %}
+										<span class="lrvl-pd" style="width:100%">
+									{% else %}
+									<!-- <span class="lrvl-pd" style="width:23%"> -->
+									{% endif %}
+										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#a40047" tabindex="0" jsaction="jsa.go">
+											<span class="lrvl-jnc">{{linepus.lineup_number}}</span>
+										</div>
+										<div>
+										<span class="lrvl-pnc">{{linepus.lineup_player}}</span>
+										</div>
+									</span>
+
+									{% endif %}
+
+
+
+									{% if linepus.lineup_position == match_away_row.one %}
 								</div>
-
-								<div class="lrvl-fr" style="height:20%">
-									<span class="lrvl-pd" style="width:25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">4</span>
-											<img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
-										</div>
-										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
-										</div>
-									</span>
-
-									<span class="lrvl-pd" style="width:25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">5</span>
-										</div>
-										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
-										</div>
-									</span>
-
-									<span class="lrvl-pd" style="width:25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">15</span>
-											<img class="lrvl-pcc" alt="Yellow card" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg"></img>
-										</div>
-										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
-										</div>
-									</span>
-
-									<span class="lrvl-pd" style="width:25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">14</span>
-										</div>
-										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
-										</div>
-									</span>
+								<div class="lrvl-fr" style="height:30%">
+									{% elif linepus.lineup_position == match_away_row.two %}
 
 								</div>
-
-								<div class="lrvl-fr" style="height:20%">
-									<span class="lrvl-pd" style="width:100%">
-										<div class="lrvl-pc imso-loa" aria-label="Striker" style="background-color:#AA0000" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">7</span>
-											<img class="lrvl-ors-g" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
-										</div>
-										<div>
-										<span class="lrvl-pnc">C. Stuani</span>
-										</div>
-									</span>
+								<div class="lrvl-fr" style="height:30%">
+									{% elif linepus.lineup_position == match__row.three %}
 								</div>
+								<div class="lrvl-fr" style="height:30%">
 
+									{% endif %}
+
+									{% endfor %}
+
+								</div>
 							</div>
 
 
 
-							<div class="lrvl-fl lrvl-bgc"></div>
-							<div class="lrvl-fl lrvl-bgl lrvl-gll"></div>
-							<div class="lrvl-fl lrvl-bgs lrvl-gls"></div>
-
-							<div class="lrvl-ls">
-								<div class="lrvl-fr" style="height:20%">
-									<span class="lrvl-pd" style="width:100%">
-										<div class="lrvl-pc imso-loa" aria-label="Striker" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">9</span>
-											<img class="lrvl-ors-g" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
-										</div>
-										<div>
-										<span class="lrvl-pnc">I. Williams</span>
-										</div>
-									</span>
-								</div>
 
 
-								<div class="lrvl-fr" style="height:20%">
-									<span class="lrvl-pd" style="width:33.33%">
-										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">20</span>
-
-										</div>
-										<div>
-										<span class="lrvl-pnc">G. Iraizoz</span>
-										</div>
-									</span>
-									<span class="lrvl-pd" style="width:33.33%">
-										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">20</span>
-
-										</div>
-										<div>
-										<span class="lrvl-pnc">G. Iraizoz</span>
-										</div>
-									</span>
-									<span class="lrvl-pd" style="width:33.33%">
-										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">20</span>
-
-										</div>
-										<div>
-										<span class="lrvl-pnc">G. Iraizoz</span>
-										</div>
-									</span>
-								</div>
 
 
-								<div class="lrvl-fr" style="height:20%">
-									<span class="lrvl-pd" style="width:50%">
-										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">20</span>
-
-										</div>
-										<div>
-										<span class="lrvl-pnc">G. Iraizoz</span>
-										</div>
-									</span>
-
-									<span class="lrvl-pd" style="width:50%">
-										<div class="lrvl-pc imso-loa" aria-label="Midfielder" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">20</span>
-
-										</div>
-										<div>
-										<span class="lrvl-pnc">G. Iraizoz</span>
-										</div>
-									</span>
-
-								</div>
-
-								<div class="lrvl-fr" style="height:20%">
-									<span class="lrvl-pd" style="width:25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">12</span>
-											<img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
-										</div>
-										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
-										</div>
-									</span>
-
-									<span class="lrvl-pd" style="width:25%"}}>
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">4</span>
-										</div>
-										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
-										</div>
-									</span>
-
-									<span class="lrvl-pd" style="width:25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">3</span>
-											<img class="lrvl-pcc" alt="Yellow card" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/yellow-card-right.svg"></img>
-										</div>
-										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
-										</div>
-									</span>
-
-									<span class="lrvl-pd" style="width:25%">
-										<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">21</span>
-										</div>
-										<div>
-										<span class="lrvl-pnc">J. Ramalho</span>
-										</div>
-									</span>
-
-								</div>
-
-								<div class="lrvl-fr" style="height:20%">
-									<span class="lrvl-pd" style="width:100%">
-										<div class="lrvl-pc imso-loa" aria-label="Striker" style="background-color:#FF6F47" tabindex="0" jsaction="jsa.go">
-											<span class="lrvl-jnc">13</span>
-											<img class="lrvl-ors-g" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/soccer-ball.svg" alt=""></img>
-										</div>
-										<div>
-										<span class="lrvl-pnc">G. I. Herrerín</span>
-										</div>
-									</span>
-								</div>
-
-							</div>
 
 							<div class="ground-team">
 								<img  src="//ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_96x96.png" alt=""></img>

@@ -145,13 +145,21 @@ def match_details(request, match_id):
 
     }
 
+    match_home_format = match_info['match_hometeam_system'].split('-')
+
+    # Calculating home row counter
+    home_row_counter = {
+        'two':int(match_home_format[0] + 1),
+        'three':int(match_home_format[0]) + 1 + int(match_home_format [1]),
+        'four':int(match_home_format[0]) + 1 + int(match_home_format [1]) + int(match_home_format [2]),
+    }
     # Setting up home team player postion in row according to team format
     match_home_row = {}
     try:
         match_home_format = match_info['match_hometeam_system'].split('-')
         match_home_row = {
         'one' : str(int(match_home_format[0]) + 1),
-        'two': str(int(match_home_format[0]) + 1 + int(match_home_format [1]))
+        'two': str(int(match_home_format[0]) + 1 + int(match_home_format [1])),
         }
     except:
         print("Hello World!")
@@ -343,7 +351,7 @@ def match_details(request, match_id):
         statistics.append(stats)
 
 
-    return render(request, 'match-details.html', context={'match_info':match_info, 'goalscorer':goalscorer,  'lineup_home_starting':lineup_home_starting,'lineup_home_substitutes':lineup_home_substitutes,'home_manager':home_manager,'lineup_away_starting':lineup_away_starting,'lineup_away_substitutes':lineup_away_substitutes,'away_manager':away_manager,'statistics':statistics,'match_home_row':match_home_row,'match_away_row':match_away_row,'events':events, 'player_ins':player_ins, 'player_outs':player_outs})
+    return render(request, 'match-details.html', context={'match_info':match_info, 'goalscorer':goalscorer,  'lineup_home_starting':lineup_home_starting,'lineup_home_substitutes':lineup_home_substitutes,'home_manager':home_manager,'lineup_away_starting':lineup_away_starting,'lineup_away_substitutes':lineup_away_substitutes,'away_manager':away_manager,'statistics':statistics,'match_home_row':match_home_row,'match_away_row':match_away_row,'events':events, 'player_ins':player_ins, 'player_outs':player_outs, 'home_row_counter':home_row_counter})
 
 
 # Converting json date string to custom date format
