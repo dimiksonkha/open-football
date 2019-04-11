@@ -197,13 +197,13 @@
 									</span>
 
 									{% else %}
-									{% if forloop.counter <= 3 %}
+									{% if forloop.counter <= away_row_counter.one %}
 										<span class="lrvl-pd" style="width:32.5%">
-									{% elif forloop.counter <= 6 %}
+									{% elif forloop.counter <= away_row_counter.two %}
 										<span class="lrvl-pd" style="width:32.5%">
-									{% elif forloop.counter <= 10 %}
+									{% elif forloop.counter <= away_row_counter.three %}
 										<span class="lrvl-pd" style="width:23%">
-									{% elif forloop.counter <= 11 %}
+									{% elif forloop.counter <= away_row_counter.four %}
 										<span class="lrvl-pd" style="width:100%">
 									{% else %}
 									<!-- <span class="lrvl-pd" style="width:23%"> -->
