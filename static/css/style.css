@@ -1,7 +1,4 @@
-.score {
-
-
-}
+/* Home Page CSS */
 .table-row{
 cursor:pointer;
 }
@@ -12,7 +9,17 @@ cursor:pointer;
   padding-left:15px;
 }
 
+/* Footer CSS */
+footer{
+    background:#303030;
+    color:white;
+    text-align: center;
+    padding:100px;
+    height:200px;
+    margin-top:44px;
+}
 
+/* Lineups CSS */
 
 .lineup-ground-container {
     margin: -4px -16px;
