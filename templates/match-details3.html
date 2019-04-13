@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+  <title>Django Football</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+  <ul class="nav nav-tabs ">
+    <li class="active"><a data-toggle="tab" href="#timeline">TIMELINE</a></li>
+    <li><a data-toggle="tab" href="#lineups">LINEUPS</a></li>
+    <li><a data-toggle="tab" href="#stats">STATS</a></li>
+    <li><a data-toggle="tab" href="#news">NEWS</a></li>
+  </ul>
+
+  <div class="tab-content">
+		<!-- Timeline  -->
+		<div id="timeline" class="tab-pane fade in">
+
+    </div>
+		<!-- Lineup -->
+		<div id="lineups" class="tab-pane fade">
+			<div class="lineup-ground-container">
+				<div class="ground-team">
+					<img  src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png" alt=""></img>
+					<span class="ground-team-home">{{match_info.match_hometeam_name}}</span>
+					<span class="ground-team-format">{{match_info.match_hometeam_system}}</span>
+				</div>
+
+				<div class="lrvl-fl lrvl-tgc"></div>
+				<div class="lrvl-fl lrvl-tg lrvl-gll"></div>
+				<div class="lrvl-fl lrvl-tg lrvl-gls"></div>
+				<div class="lrvl-fl lrvl-mfc lrvl-vac"></div>
+				<div class="lrvl-mfl lrvl-vac"></div>
+				<div class="lrvl-ls">
+
+					<div class="lrvl-fr" style="height:30%">
+
+						{% for linepus in lineup_home_starting %}
+
+						{% if linepus.lineup_player in player_outs %}
+						<span class="lrvl-pd" style="width:25%">
+							<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#005FAB" tabindex="0" jsaction="jsa.go">
+								<span class="lrvl-jnc">{{linepus.lineup_number}}</span>
+								<img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
+							</div>
+							<div>
+							<span class="lrvl-pnc">{{linepus.lineup_player}}</span>
+							</div>
+						</span>
+
+						{% else %}
+							{% if forloop.counter == 1 %}
+								<span class="lrvl-pd" style="width:100%">
+							{% elif forloop.counter <= home_row_counter.two %}
+								<span class="lrvl-pd" style="width:32.5%">
+							{% elif forloop.counter <= home_row_counter.three %}
+								<span class="lrvl-pd" style="width:23%">
+							{% elif forloop.counter <= home_row_counter.four %}
+								<span class="lrvl-pd" style="width:32.5%">
+							{% else %}
+							<span class="lrvl-pd" style="width:23%">
+							{% endif %}
+							<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#005FAB" tabindex="0" jsaction="jsa.go">
+								<span class="lrvl-jnc">{{linepus.lineup_number}}</span>
+							</div>
+							<div>
+							<span class="lrvl-pnc">{{linepus.lineup_player}}</span>
+							</div>
+						</span>
+
+						{% endif %}
+
+
+
+						{% if linepus.lineup_position == '1' %}
+					</div>
+					<div class="lrvl-fr" style="height:30%">
+						{% elif linepus.lineup_position == match_home_row.one %}
+
+					</div>
+					<div class="lrvl-fr" style="height:25%">
+						{% elif linepus.lineup_position == match_home_row.two %}
+					</div>
+					<div class="lrvl-fr" style="height:25%">
+
+						{% endif %}
+
+						{% endfor %}
+
+					</div>
+				</div>
+
+					<div class="lrvl-fl lrvl-bgc"></div>
+					<div class="lrvl-fl lrvl-bgl lrvl-gll"></div>
+					<div class="lrvl-fl lrvl-bgs lrvl-gls"></div>
+					<div class="lrvl-ls">
+
+					<div class="lrvl-fr" style="height:30%">
+
+						{% for linepus in lineup_away_starting %}
+
+						{% if linepus.lineup_player in player_outs %}
+						<span class="lrvl-pd" style="width:25%">
+							<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#a40047" tabindex="0" jsaction="jsa.go">
+								<span class="lrvl-jnc">{{linepus.lineup_number}}</span>
+								<img class="lrvl-sic" alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-out.svg"></img>
+							</div>
+							<div>
+							<span class="lrvl-pnc">{{linepus.lineup_player}}</span>
+							</div>
+						</span>
+
+						{% else %}
+						{% if forloop.counter <= away_row_counter.one %}
+							<span class="lrvl-pd" style="width:32.5%">
+						{% elif forloop.counter <= away_row_counter.two %}
+							<span class="lrvl-pd" style="width:32.5%">
+						{% elif forloop.counter <= away_row_counter.three %}
+							<span class="lrvl-pd" style="width:23%">
+						{% elif forloop.counter <= away_row_counter.four %}
+							<span class="lrvl-pd" style="width:100%">
+						{% else %}
+						<!-- <span class="lrvl-pd" style="width:23%"> -->
+						{% endif %}
+							<div class="lrvl-pc imso-loa" aria-label="Defender" style="background-color:#a40047" tabindex="0" jsaction="jsa.go">
+								<span class="lrvl-jnc">{{linepus.lineup_number}}</span>
+							</div>
+							<div>
+							<span class="lrvl-pnc">{{linepus.lineup_player}}</span>
+							</div>
+						</span>
+
+						{% endif %}
+
+
+
+						{% if linepus.lineup_position == match_away_row.one %}
+					</div>
+					<div class="lrvl-fr" style="height:30%">
+						{% elif linepus.lineup_position == match_away_row.two %}
+
+					</div>
+					<div class="lrvl-fr" style="height:30%">
+						{% elif linepus.lineup_position == match__row.three %}
+					</div>
+					<div class="lrvl-fr" style="height:30%">
+
+						{% endif %}
+
+						{% endfor %}
+
+					</div>
+				</div>
+
+				<div class="ground-team">
+					<img  src="//ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_96x96.png" alt=""></img>
+					<span class="ground-team-home">{{match_info.match_awayteam_name}}</span>
+					<span class="ground-team-format">{{match_info.match_awayteam_system}}</span>
+				</div>
+
+			</div>
+
+
+			<div style="padding-left:40px;margin-top:20px">
+				<span>
+					<img
+					src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png"
+					alt=""
+					style="width:24px; height:24px">
+					</img>
+					<span style="padding-left:140px;padding-right:130; font-weight:bold">SUBSTITUES</span>
+					<img
+					src="https://ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_48x48.png"
+					alt=""
+					style="width:24px; height:24px">
+					</img>
+				</span>
+			</div>
+
+		<table style="margin-left:35px;margin-top:20px" class="table table-borderless">
+		<tbody>
+		<tr>
+			<td>
+				{% if lineup_home_substitutes %}
+				{% for subs in lineup_home_substitutes %}
+				<ul style="list-style-type:none">
+					{% if subs.lineup_player in player_ins %}
+					<li>{{subs.lineup_number}}{{subs.lineup_player}}<img alt="" src="//ssl.gstatic.com/onebox/sports/soccer_timeline/substitution-in.svg"></li>
+					{% else %}
+					<li>{{subs.lineup_number}}{{subs.lineup_player}}</li>
+					{% endif %}
+				</ul>
+				{% endfor %}
+				{% endif %}
+
+			</td>
+			<td></td>
+			<td></td>
+			<td>
+				{% if lineup_away_substitutes %}
+				{% for subs in lineup_away_substitutes %}
+				<ul style="list-style-type:none">
+					{% if subs.lineup_player in player_ins %}
+					<li>{{subs.lineup_number}}{{subs.lineup_player}}^</li>
+					{% else %}
+					<li>{{subs.lineup_number}}{{subs.lineup_player}}</li>
+					{% endif %}
+				</ul>
+				{% endfor %}
+				{% endif %}
+			</td>
+		</tr>
+
+		</tbody>
+	</table>
+
+
+			<div style="padding-left:40px; margin-top:20px">
+			<span>
+				<img
+				src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png"
+				alt=""
+				style="width:24px; height:24px">
+				</img>
+				<span style="padding-left:140px; padding-right:130px;font-weight:bold">MANAGER</span>
+				<img
+				src="https://ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_48x48.png"
+				alt=""
+				style="width:24px; height:24px">
+				</img>
+			</span>
+			</div>
+			<table style="margin-left:35px;margin-top:20px" class="table table-borderless">
+				<tbody>
+					<tr><td>{{home_manager.lineup_player}}</td><td></td><td>{{away_manager.lineup_player}}</td></tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<!-- Statistics -->
+		<div id="stats" class="tab-pane fade">
+			<table style="margin-left:35px;" class="table table-borderless">
+				<thead>
+					<tr>
+						<th scope="col">
+						<img
+						src="//ssl.gstatic.com/onebox/media/sports/logos/Id84F7Ji9rZGVacaazlBYA_48x48.png"
+						alt=""
+						style="width:24px;height:24px;">
+						</th>
+						<th scope="col">TEAM STATS</th>
+						<th scope="col">
+						<img
+						src="https://ssl.gstatic.com/onebox/media/sports/logos/Tyy5rCdiLCw2_8z04DM-GQ_48x48.png"
+						alt=""
+						style="width:24px;height:24px;">
+						</img>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if statistics %}
+						{% for stats in statistics %}
+							<tr>
+								<td>{{stats.home}}</td>
+								<td>{{stats.type}}</td>
+								<td>{{stats.away}}</td>
+						</tr>
+						{% endfor %}
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+    <div id="news" class="tab-pane fade">
+      <h3>Oh Sorry!!!!!!!!!!!!!!</h3>
+      <p>Please wait for future version!</p>
+    </div>
+
+
+
+
+
+</body>
+</html>
