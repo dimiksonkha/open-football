@@ -206,7 +206,7 @@ def match_details(request, match_id):
     match_away_row = {}
     away_row_counter = {}
     away_row_width = {}
-          
+
     try:
         match_away_format = match_info['match_awayteam_system'].split('-')
         if len(match_away_format) == 3:
