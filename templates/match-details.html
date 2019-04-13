@@ -104,7 +104,7 @@
 			<div class="tab-content" style="font-size:12px">
 
 				<!-- Timeline  -->
-				<div id="timeline" class="tab-pane fade in">
+				<div id="timeline" class="tab-pane fade in active">
 					<div>
 					<!-- Full Time -->
 
@@ -619,11 +619,13 @@
 									{% if forloop.counter == 1 %}
 										<span class="lrvl-pd" style="width:100%">
 									{% elif forloop.counter <= home_row_counter.two %}
-										<span class="lrvl-pd" style="width:32.5%">
+										<span class="lrvl-pd" style="width:{{home_row_width.two}}%">
 									{% elif forloop.counter <= home_row_counter.three %}
-										<span class="lrvl-pd" style="width:23%">
+										<span class="lrvl-pd" style="width:{{home_row_width.three}}%">
 									{% elif forloop.counter <= home_row_counter.four %}
-										<span class="lrvl-pd" style="width:32.5%">
+										<span class="lrvl-pd" style="width:{{home_row_width.four}}%">
+									{% elif forloop.counter <= home_row_counter.five %}
+										<span class="lrvl-pd" style="width:{{home_row_width.five}}%">
 									{% else %}
 									<span class="lrvl-pd" style="width:23%">
 									{% endif %}
@@ -647,6 +649,9 @@
 							</div>
 							<div class="lrvl-fr" style="height:25%">
 								{% elif linepus.lineup_position == match_home_row.two %}
+							</div>
+							<div class="lrvl-fr" style="height:25%">
+								{% elif linepus.lineup_position == match_home_row.three %}
 							</div>
 							<div class="lrvl-fr" style="height:25%">
 
@@ -679,12 +684,14 @@
 
 								{% else %}
 								{% if forloop.counter <= away_row_counter.one %}
-									<span class="lrvl-pd" style="width:32.5%">
+									<span class="lrvl-pd" style="width:{{away_row_width.one}}%">
 								{% elif forloop.counter <= away_row_counter.two %}
-									<span class="lrvl-pd" style="width:32.5%">
+									<span class="lrvl-pd" style="width:{{away_row_width.two}}%">
 								{% elif forloop.counter <= away_row_counter.three %}
-									<span class="lrvl-pd" style="width:23%">
+									<span class="lrvl-pd" style="width:{{away_row_width.three}}%">
 								{% elif forloop.counter <= away_row_counter.four %}
+											<span class="lrvl-pd" style="width:{{away_row_width.four}}%">		
+								{% elif forloop.counter <= 11 %}
 									<span class="lrvl-pd" style="width:100%">
 								{% else %}
 								<!-- <span class="lrvl-pd" style="width:23%"> -->

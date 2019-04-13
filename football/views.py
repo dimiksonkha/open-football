@@ -145,49 +145,111 @@ def match_details(request, match_id):
 
     }
 
-    match_home_format = match_info['match_hometeam_system'].split('-')
-
-    # Calculating home row counter
-    home_row_counter = {
-        'two':int(match_home_format[0]) + 1,
-        'three':int(match_home_format[0]) + 1 + int(match_home_format [1]),
-        'four':int(match_home_format[0]) + 1 + int(match_home_format [1]) + int(match_home_format [2]),
-    }
-    # Setting up home team player postion in row according to team format
-    match_home_row = {}
     try:
         match_home_format = match_info['match_hometeam_system'].split('-')
-        match_home_row = {
-        'one' : str(int(match_home_format[0]) + 1),
-        'two': str(int(match_home_format[0]) + 1 + int(match_home_format [1])),
-        }
+        if len(match_home_format) == 3:
+                # Calculating home row counter
+                home_row_counter = {
+                    'two':int(match_home_format[0]) + 1,
+                    'three':int(match_home_format[0]) + 1 + int(match_home_format [1]),
+                    'four':int(match_home_format[0]) + 1 + int(match_home_format [1]) + int(match_home_format [2]),
+                }
+
+                # Calculating home row item width
+                home_row_width = {
+                    'two':float(100/int(match_home_format[0])-2),
+                    'three':float(100/int(match_home_format [1])-2),
+                    'four':float(100/int(match_home_format [2])-2),
+                }
+                # Setting up home team player postion in row according to team format
+                match_home_row = {
+                'one' : str(int(match_home_format[0]) + 1),
+                'two': str(int(match_home_format[0]) + 1 + int(match_home_format [1])),
+                }
+
+        else:
+            # Calculating home row counter
+            home_row_counter = {
+                'two':int(match_home_format[0]) + 1,
+                'three':int(match_home_format[0]) + 1 + int(match_home_format [1]),
+                'four':int(match_home_format[0]) + 1 + int(match_home_format [1]) + int(match_home_format [2]),
+                'five':int(match_home_format[0]) + 1 + int(match_home_format [1]) + int(match_home_format [2]) + int(match_home_format [3])}
+
+            # Calculating home row item width
+            home_row_width = {
+                'two':float(100/int(match_home_format[0])-2),
+                'three':float(100/int(match_home_format [1])-2),
+                'four':float(100/int(match_home_format [2])-2),
+                'five':float(100/int(match_home_format [3])-2),
+            }
+
+            # Setting up home team player postion in row according to team format
+            match_home_row = {
+                'one' : str(int(match_home_format[0]) + 1),
+                'two': str(int(match_home_format[0]) + 1 + int(match_home_format [1])),
+                'three':str(int(match_home_format[0]) + 1 + int(match_home_format [1]) + int(match_home_format [2]) + int(match_home_format [3])),
+             }
+
     except:
-        print("Hello World!")
+            print("home format not found!")
 
-    # Calculating Away Row Counter
-    match_away_format = match_info['match_awayteam_system'].split('-')
-    away_row_counter = {
-        'one':int(match_away_format[2]),
-        'two':int(match_away_format[2]) + int(match_away_format[1]),
-        'three':int(match_away_format[2])+int(match_away_format[1])+int(match_away_format[0]),
-        'four':int(match_away_format[2])+int(match_away_format[1])+int(match_away_format[0]) + 1,
 
-    }
 
-    # Setting up away team player postion in row according to team format
-    match_away_row = {}
+
+
     try:
         match_away_format = match_info['match_awayteam_system'].split('-')
+        if len(match_away_format) == 3:
+            # Calculating Away Row Counter
+            away_row_counter = {
+                'one':int(match_away_format[2]),
+                'two':int(match_away_format[2]) + int(match_away_format[1]),
+                'three':int(match_away_format[2])+int(match_away_format[1])+int(match_away_format[0]),
+            }
 
-        match_away_row = {
-        'one' : str((11-int(match_away_format[2]))+1),
-        'two': str(11-(int(match_away_format[2])+int(match_away_format[1]))+1),
-        'three':str(11-(int(match_away_format[2])+int(match_away_format[1])+int(match_away_format[0]))+1),
-        }
+            # Calculating Away row item with
+
+            away_row_width = {
+            'one' : float(100/int(match_away_format[2])-2),
+            'two': float(100/int(match_away_format[1])-2),
+            'three':float(100/int(match_away_format[0])-2),
+
+
+            }
+            # Calculating Match Away Row
+            match_away_row = {
+                'one' : str((11-int(match_away_format[2]))+1),
+                'two': str((11-int(match_away_format[2])+int(match_away_format[1]))+1),
+                'three':str(11-int(match_away_format[2])+int(match_away_format[1])+ int(match_away_format[0])+1),
+            }
+        else:
+            # Calculating Away Row Counter
+            away_row_counter = {
+                'one':int(match_away_format[3]),
+                'two':int(match_away_format[3]) + int(match_away_format[2]),
+                'three':int(match_away_format[3])+int(match_away_format[2])+int(match_away_format[1]),
+                'four':int(match_away_format[3])+int(match_away_format[2])+int(match_away_format[1])+int(match_away_format[0]),
+            }
+
+            # Calculating Away row item width
+
+            away_row_width = {
+            'one' : float(100/int(match_away_format[3])-2),
+            'two': float(100/int(match_away_format[2])-2),
+            'three':float(100/int(match_away_format[1])-2),
+            'four':float(100/int(match_away_format[0])-2),
+
+
+            }
+            # Calculating Match Away Row
+            match_away_row = {
+                'one' : str(11-int(match_away_format[3])+1),
+                'two': str(11-int(match_away_format[3])+int(match_away_format[2])+1),
+                'three': str(11-(int(match_away_format[3])+int(match_away_format[2])+ int(match_away_format[1]))+1),
+                'four':str(11-(int(match_away_format[3]) + int(match_away_format[2])+int(match_away_format[1])+int(match_away_format[0]))+1),
+            }
     except:
-        print("Hello World!")
-
-
+        "No Away Format"
 
     # Populating Goalscorer Information
     length = len(response[0]['goalscorer'])
@@ -361,7 +423,7 @@ def match_details(request, match_id):
         statistics.append(stats)
 
 
-    return render(request, 'match-details.html', context={'match_info':match_info, 'goalscorer':goalscorer,  'lineup_home_starting':lineup_home_starting,'lineup_home_substitutes':lineup_home_substitutes,'home_manager':home_manager,'lineup_away_starting':lineup_away_starting,'lineup_away_substitutes':lineup_away_substitutes,'away_manager':away_manager,'statistics':statistics,'match_home_row':match_home_row,'match_away_row':match_away_row,'events':events, 'player_ins':player_ins, 'player_outs':player_outs, 'home_row_counter':home_row_counter, 'away_row_counter':away_row_counter})
+    return render(request, 'match-details.html', context={'match_info':match_info, 'goalscorer':goalscorer,  'lineup_home_starting':lineup_home_starting,'lineup_home_substitutes':lineup_home_substitutes,'home_manager':home_manager,'lineup_away_starting':lineup_away_starting,'lineup_away_substitutes':lineup_away_substitutes,'away_manager':away_manager,'statistics':statistics,'match_home_row':match_home_row,'match_away_row':match_away_row,'events':events, 'player_ins':player_ins, 'player_outs':player_outs, 'home_row_counter':home_row_counter, 'away_row_counter':away_row_counter,"home_row_width":home_row_width,"away_row_width":away_row_width})
 
 
 # Converting json date string to custom date format
