@@ -27,7 +27,7 @@ To use this appication you have to sign up for https://apifootball.com and get y
   <li>Type: <code>python manage.py runserver</code></li> then hit enter
   <li>Open browser then Type:http://127.0.0.1:8000</li> 
 </ul>  
-H
+
 <h2>Features</h2>
 <ul>
   <li>Live score update of all football leauges including world cups</li>
