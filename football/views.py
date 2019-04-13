@@ -145,6 +145,11 @@ def match_details(request, match_id):
 
     }
 
+    # Lineups Home Team
+    match_home_row = {}
+    home_row_counter = {}
+    home_row_width = {}
+
     try:
         match_home_format = match_info['match_hometeam_system'].split('-')
         if len(match_home_format) == 3:
@@ -197,6 +202,11 @@ def match_details(request, match_id):
 
 
 
+    # Lineups Away  Team
+    match_away_row = {}
+    away_row_counter = {}
+    away_row_width = {}
+          
     try:
         match_away_format = match_info['match_awayteam_system'].split('-')
         if len(match_away_format) == 3:

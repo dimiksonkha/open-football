@@ -19,5 +19,6 @@ from football import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.get_match_data, name='match_data'),
     path('football/', include('football.urls')),
 ]
