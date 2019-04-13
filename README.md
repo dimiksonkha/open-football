@@ -1,1 +1,1 @@
-# DjangoFootball
+# OpenFootball
