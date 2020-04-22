@@ -9,7 +9,7 @@ To use this appication you have to sign up for https://apifootball.com and get y
  <li> <strong> Description:</strong> Football application using Django</li>
  <li> <strong> Version:</strong> v1.0</li>
  <li> <strong> Author:</strong> xHacker404 </li>
- <li> <strong> Demo:</strong> <a href="https://youtu.be/hXJC_x_SC3A" target="_blank">Open Football </a></li>
+ <li> <strong> Demo:</strong> <a href="https://youtu.be/4dU9DkmpXxg" target="_blank">Open Football </a></li>
 </ul>
 
 <h2>Requirements:</h2>
